@@ -5,6 +5,8 @@
     <class>Entidades.Vacunas</class>
     <class>Entidades.Paciente</class>
     <class>Entidades.Usuarios</class>
+    <class>Entidades.Farmacia</class>
+    <class>Entidades.Hospital</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/proyectofinal?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

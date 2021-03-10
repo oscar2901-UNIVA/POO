@@ -66,6 +66,7 @@ public class registroUsuario extends javax.swing.JFrame {
         btnAgregar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        btnRegresarMenuPrinc = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -166,6 +167,16 @@ public class registroUsuario extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(310, 20, 300, 50);
 
+        btnRegresarMenuPrinc.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnRegresarMenuPrinc.setText("Regresar al menu principal");
+        btnRegresarMenuPrinc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarMenuPrincActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnRegresarMenuPrinc);
+        btnRegresarMenuPrinc.setBounds(270, 720, 310, 60);
+
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/covid19/imagenfONDO.png"))); // NOI18N
         getContentPane().add(jLabel2);
         jLabel2.setBounds(0, 0, 870, 850);
@@ -248,6 +259,12 @@ public class registroUsuario extends javax.swing.JFrame {
         System.exit(WIDTH);
     }//GEN-LAST:event_btnSalirActionPerformed
 
+    private void btnRegresarMenuPrincActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarMenuPrincActionPerformed
+        inicioAdministrados pac = new  inicioAdministrados();
+        pac.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnRegresarMenuPrincActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -287,6 +304,7 @@ public class registroUsuario extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnModificar;
+    private javax.swing.JButton btnRegresarMenuPrinc;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

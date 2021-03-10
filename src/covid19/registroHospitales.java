@@ -5,49 +5,47 @@
  */
 package covid19;
 
-import Controladores.VacunasJpaController;
-import Controladores.exceptions.NonexistentEntityException;
-import Entidades.Vacunas;
+
+import Controladores.HospitalJpaController;
+import Entidades.Hospital;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author oscar
  */
-public class registroVacuna extends javax.swing.JFrame {
+public class registroHospitales extends javax.swing.JFrame {
 
     /**
-     * Creates new form registroVacuna
+     * Creates new form registroHospitales
      */
-    public registroVacuna() {
+    public registroHospitales() {
         initComponents();
-        cargaTabla();
-        limpiar();
     }
+
     private void cargaTabla(){
         DefaultTableModel dtm = new DefaultTableModel();
         dtm.addColumn("ID");
-        dtm.addColumn("Nombre de vacuna");
-        dtm.addColumn("Cantidad");
+        dtm.addColumn("Nombre farmacia");
+        dtm.addColumn("Municipio");
+        dtm.addColumn("Vacuna disponible");
         
        
         Object[] fila = new Object[3];
-        VacunasJpaController pc = new VacunasJpaController();
-        List<Vacunas> lista = pc.findVacunasEntities();
-        for(Vacunas p:lista){
+        HospitalJpaController pc = new HospitalJpaController();
+        List<Hospital> lista = pc.findHospitalEntities();
+        for(Hospital p:lista){
             fila[0]= p.getId();
-            fila[1]= p.getNombreDeVacuna();
-            fila[2]= p.getCantidad();
+            fila[1]= p.getNombreHospital();
+            fila[2]= p.getSeguroDeGatosMedicos();
+           
             
      
             dtm.addRow(fila);
             
         }
-        tblVacunas.setModel(dtm);
+        tblHospital.setModel(dtm);
     }
 //    
     private void limpiar(){
@@ -55,7 +53,40 @@ public class registroVacuna extends javax.swing.JFrame {
         txtCantidadVacunas.setText("");
         
     }
-
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -65,12 +96,11 @@ public class registroVacuna extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnRegresarMenuPrinc = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tblVacunas = new javax.swing.JTable();
+        tblHospital = new javax.swing.JTable();
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         jLimpiar = new javax.swing.JButton();
@@ -80,14 +110,6 @@ public class registroVacuna extends javax.swing.JFrame {
         txtCantidadVacunas = new javax.swing.JTextField();
         btnRegresarMenuPrinc1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-
-        btnRegresarMenuPrinc.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btnRegresarMenuPrinc.setText("Regresar al menu principal");
-        btnRegresarMenuPrinc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegresarMenuPrincActionPerformed(evt);
-            }
-        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -104,16 +126,16 @@ public class registroVacuna extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Registro Vacunas");
+        jLabel4.setText("Registro hospitales");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(320, 0, 290, 80);
+        jLabel4.setBounds(320, 0, 320, 80);
 
-        tblVacunas.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblHospital.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblVacunasMouseClicked(evt);
+                tblHospitalMouseClicked(evt);
             }
         });
-        jScrollPane3.setViewportView(tblVacunas);
+        jScrollPane3.setViewportView(tblHospital);
 
         getContentPane().add(jScrollPane3);
         jScrollPane3.setBounds(150, 460, 560, 250);
@@ -192,24 +214,23 @@ public class registroVacuna extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tblVacunasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVacunasMouseClicked
-        int renglon = tblVacunas.getSelectedRow();
-        txtNombreVacuna.setText(tblVacunas.getValueAt(renglon, 1).toString());
-        txtCantidadVacunas.setText(tblVacunas.getValueAt(renglon, 2).toString());
+    private void tblHospitalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHospitalMouseClicked
+        int renglon = tblHospital.getSelectedRow();
+        txtNombreVacuna.setText(tblHospital.getValueAt(renglon, 1).toString());
+        txtCantidadVacunas.setText(tblHospital.getValueAt(renglon, 2).toString());
 
         btnModificar.setEnabled(true);
         btnEliminar.setEnabled(true);
-    }//GEN-LAST:event_tblVacunasMouseClicked
+    }//GEN-LAST:event_tblHospitalMouseClicked
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
 
-        int renglon = tblVacunas.getSelectedRow();
-        int id =  (int)tblVacunas.getValueAt(renglon, 0);
+        int renglon = tblHospital.getSelectedRow();
+        int id =  (int)tblHospital.getValueAt(renglon, 0);
         Vacunas us = new Vacunas();
         us.setId(id);
         us.setNombreDeVacuna(txtNombreVacuna.getText());
         us.setCantidad(Integer.parseInt(txtCantidadVacunas.getText()));
-        
 
         VacunasJpaController oscar = new VacunasJpaController();
         try {
@@ -224,8 +245,8 @@ public class registroVacuna extends javax.swing.JFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
 
-        int renglon = tblVacunas.getSelectedRow();
-        int id =  (int)tblVacunas.getValueAt(renglon, 0);
+        int renglon = tblHospital.getSelectedRow();
+        int id =  (int)tblHospital.getValueAt(renglon, 0);
         VacunasJpaController oscar = new VacunasJpaController();
         try {
             oscar.destroy(id);
@@ -246,7 +267,7 @@ public class registroVacuna extends javax.swing.JFrame {
         Vacunas vac = new Vacunas();
         vac.setNombreDeVacuna(txtNombreVacuna.getText());
         vac.setCantidad(Integer.parseInt(txtCantidadVacunas.getText()));
-        
+
         Controladores.VacunasJpaController Oscar = new Controladores.VacunasJpaController();
         Oscar.create(vac);
         JOptionPane.showMessageDialog(this, "Vacuna agregada exitosamente");
@@ -257,12 +278,6 @@ public class registroVacuna extends javax.swing.JFrame {
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         System.exit(WIDTH);
     }//GEN-LAST:event_btnSalirActionPerformed
-
-    private void btnRegresarMenuPrincActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarMenuPrincActionPerformed
-        inicioAdministrados pac = new  inicioAdministrados();
-        pac.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnRegresarMenuPrincActionPerformed
 
     private void btnRegresarMenuPrinc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarMenuPrinc1ActionPerformed
         inicioAdministrados pac = new  inicioAdministrados();
@@ -287,20 +302,20 @@ public class registroVacuna extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(registroVacuna.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(registroHospitales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(registroVacuna.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(registroHospitales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(registroVacuna.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(registroHospitales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(registroVacuna.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(registroHospitales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new registroVacuna().setVisible(true);
+                new registroHospitales().setVisible(true);
             }
         });
     }
@@ -309,7 +324,6 @@ public class registroVacuna extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnModificar;
-    private javax.swing.JButton btnRegresarMenuPrinc;
     private javax.swing.JButton btnRegresarMenuPrinc1;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
@@ -318,7 +332,7 @@ public class registroVacuna extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JButton jLimpiar;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable tblVacunas;
+    private javax.swing.JTable tblHospital;
     private javax.swing.JTextField txtCantidadVacunas;
     private javax.swing.JTextField txtNombreVacuna;
     // End of variables declaration//GEN-END:variables

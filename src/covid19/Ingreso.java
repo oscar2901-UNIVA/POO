@@ -46,6 +46,7 @@ public class Ingreso extends javax.swing.JFrame {
         btnIngresar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        btnRegistrarme = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
         jPasswordField1.setText("jPasswordField1");
@@ -88,6 +89,11 @@ public class Ingreso extends javax.swing.JFrame {
         btnSalir.setBackground(new java.awt.Color(204, 204, 204));
         btnSalir.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnSalir);
         btnSalir.setBounds(620, 580, 230, 90);
 
@@ -97,9 +103,19 @@ public class Ingreso extends javax.swing.JFrame {
         getContentPane().add(jLabel4);
         jLabel4.setBounds(400, 20, 180, 50);
 
+        btnRegistrarme.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        btnRegistrarme.setText("Registrarme");
+        btnRegistrarme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarmeActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnRegistrarme);
+        btnRegistrarme.setBounds(410, 580, 190, 90);
+
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/covid19/imagenfONDO.png"))); // NOI18N
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(0, 0, 1000, 850);
+        jLabel3.setBounds(-10, 20, 1000, 850);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -135,6 +151,16 @@ public class Ingreso extends javax.swing.JFrame {
           
 
     }//GEN-LAST:event_btnIngresarActionPerformed
+
+    private void btnRegistrarmeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarmeActionPerformed
+        pacienteRegistro pac = new pacienteRegistro();
+        pac.setVisible(true);
+      this.dispose();
+    }//GEN-LAST:event_btnRegistrarmeActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        System.exit(WIDTH);
+    }//GEN-LAST:event_btnSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -173,6 +199,7 @@ public class Ingreso extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIngresar;
+    private javax.swing.JButton btnRegistrarme;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

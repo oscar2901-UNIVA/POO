@@ -77,6 +77,8 @@ public class pacienteRegistro extends javax.swing.JFrame {
         txtCodigoPostal.setText("");
         txtCurp.setText("");
         txtNombre.requestFocus();
+//        Rfemenino.setSelectedIcon("");
+//        Rmasculino.setSelectedIcon("");
     }
     
     
@@ -146,8 +148,8 @@ public class pacienteRegistro extends javax.swing.JFrame {
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 120, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel4.setText("Fecha de nacimiento: (DD/MM/YY)");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 163, 283, -1));
+        jLabel4.setText("Fecha de nacimiento: (DD/MM/YYYY)");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 163, 300, -1));
 
         txtApellidoPaterno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,7 +163,7 @@ public class pacienteRegistro extends javax.swing.JFrame {
                 txtFechaDeNacimientoActionPerformed(evt);
             }
         });
-        getContentPane().add(txtFechaDeNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 160, 170, -1));
+        getContentPane().add(txtFechaDeNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 160, 170, -1));
 
         txtApellidoMaterno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -288,10 +290,6 @@ public class pacienteRegistro extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnRegresarMenuPrincActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarMenuPrincActionPerformed
-
-    }//GEN-LAST:event_btnRegresarMenuPrincActionPerformed
 
     private void txtApellidoPaternoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoPaternoActionPerformed
         // TODO add your handling code here:
@@ -431,6 +429,12 @@ public class pacienteRegistro extends javax.swing.JFrame {
     private void txtFechaDeNacimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaDeNacimientoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFechaDeNacimientoActionPerformed
+
+    private void btnRegresarMenuPrincActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarMenuPrincActionPerformed
+ inicioAdministrados pac = new  inicioAdministrados();
+        pac.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnRegresarMenuPrincActionPerformed
 
     /**
      * @param args the command line arguments

@@ -26,7 +26,8 @@ import javax.persistence.Table;
     @NamedQuery(name = "Usuarios.findAll", query = "SELECT u FROM Usuarios u"),
     @NamedQuery(name = "Usuarios.findById", query = "SELECT u FROM Usuarios u WHERE u.id = :id"),
     @NamedQuery(name = "Usuarios.findByUsuario", query = "SELECT u FROM Usuarios u WHERE u.usuario = :usuario"),
-    @NamedQuery(name = "Usuarios.findByPassword", query = "SELECT u FROM Usuarios u WHERE u.password = :password")})
+    @NamedQuery(name = "Usuarios.findByPassword", query = "SELECT u FROM Usuarios u WHERE u.password = :password"),
+    @NamedQuery(name = "Usuarios.findByUserId", query = "SELECT u FROM Usuarios u WHERE u.userId = :userId")})
 public class Usuarios implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -41,6 +42,8 @@ public class Usuarios implements Serializable {
     @Basic(optional = false)
     @Column(name = "password")
     private String password;
+    @Column(name = "user_id")
+    private Integer userId;
 
     public Usuarios() {
     }
@@ -77,6 +80,14 @@ public class Usuarios implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     @Override

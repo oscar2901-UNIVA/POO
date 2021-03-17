@@ -28,15 +28,17 @@ public class inicioAdministrados extends javax.swing.JFrame {
     private void initComponents() {
 
         btnRegistroPaciente = new javax.swing.JToggleButton();
-        RegistroVacuna = new javax.swing.JToggleButton();
+        btnRegistroVacuna = new javax.swing.JToggleButton();
         btnRegistroFarmacia = new javax.swing.JToggleButton();
         btnRegistroAdministrador = new javax.swing.JToggleButton();
         btnSalir = new javax.swing.JButton();
         btnRegresarMenuPrinc = new javax.swing.JButton();
         btnRegistroHospital = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1290, 900));
         getContentPane().setLayout(null);
 
         btnRegistroPaciente.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -47,17 +49,17 @@ public class inicioAdministrados extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnRegistroPaciente);
-        btnRegistroPaciente.setBounds(400, 320, 212, 62);
+        btnRegistroPaciente.setBounds(520, 160, 212, 62);
 
-        RegistroVacuna.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        RegistroVacuna.setText("Registro vacunas");
-        RegistroVacuna.addActionListener(new java.awt.event.ActionListener() {
+        btnRegistroVacuna.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnRegistroVacuna.setText("Registro vacunas");
+        btnRegistroVacuna.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RegistroVacunaActionPerformed(evt);
+                btnRegistroVacunaActionPerformed(evt);
             }
         });
-        getContentPane().add(RegistroVacuna);
-        RegistroVacuna.setBounds(400, 460, 212, 61);
+        getContentPane().add(btnRegistroVacuna);
+        btnRegistroVacuna.setBounds(520, 320, 212, 61);
 
         btnRegistroFarmacia.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnRegistroFarmacia.setText("Registro farmacias");
@@ -67,7 +69,7 @@ public class inicioAdministrados extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnRegistroFarmacia);
-        btnRegistroFarmacia.setBounds(400, 390, 212, 60);
+        btnRegistroFarmacia.setBounds(520, 240, 212, 60);
 
         btnRegistroAdministrador.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnRegistroAdministrador.setText("Registro usuario");
@@ -77,7 +79,7 @@ public class inicioAdministrados extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnRegistroAdministrador);
-        btnRegistroAdministrador.setBounds(400, 530, 212, 60);
+        btnRegistroAdministrador.setBounds(520, 400, 212, 60);
 
         btnSalir.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnSalir.setText("Salir");
@@ -87,7 +89,7 @@ public class inicioAdministrados extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnSalir);
-        btnSalir.setBounds(730, 790, 173, 60);
+        btnSalir.setBounds(990, 660, 173, 60);
 
         btnRegresarMenuPrinc.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnRegresarMenuPrinc.setText("Regresar al menu principal");
@@ -97,7 +99,7 @@ public class inicioAdministrados extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnRegresarMenuPrinc);
-        btnRegresarMenuPrinc.setBounds(70, 790, 310, 60);
+        btnRegresarMenuPrinc.setBounds(30, 650, 310, 60);
 
         btnRegistroHospital.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnRegistroHospital.setText("Registro hospitales");
@@ -107,11 +109,17 @@ public class inicioAdministrados extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnRegistroHospital);
-        btnRegistroHospital.setBounds(400, 600, 210, 60);
+        btnRegistroHospital.setBounds(520, 480, 210, 60);
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Inicio");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(630, 0, 60, 70);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/covid19/imagenfONDO.png"))); // NOI18N
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(-90, 200, 1334, 844);
+        jLabel1.setBounds(0, 0, 1334, 830);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -122,11 +130,11 @@ public class inicioAdministrados extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnRegistroPacienteActionPerformed
 
-    private void RegistroVacunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistroVacunaActionPerformed
-      registroVacuna vac = new registroVacuna();
-      vac.setVisible(true);
-      this.dispose();
-    }//GEN-LAST:event_RegistroVacunaActionPerformed
+    private void btnRegistroVacunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroVacunaActionPerformed
+     registroVacuna vacunaRegistro = new registroVacuna();
+     vacunaRegistro.setVisible(true);
+     this.dispose();
+    }//GEN-LAST:event_btnRegistroVacunaActionPerformed
 
     private void btnRegistroFarmaciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroFarmaciaActionPerformed
         registroFarmacia pac = new  registroFarmacia();
@@ -192,13 +200,14 @@ public class inicioAdministrados extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JToggleButton RegistroVacuna;
     private javax.swing.JToggleButton btnRegistroAdministrador;
     private javax.swing.JToggleButton btnRegistroFarmacia;
     private javax.swing.JButton btnRegistroHospital;
     private javax.swing.JToggleButton btnRegistroPaciente;
+    private javax.swing.JToggleButton btnRegistroVacuna;
     private javax.swing.JButton btnRegresarMenuPrinc;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

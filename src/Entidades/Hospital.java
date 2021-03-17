@@ -6,14 +6,18 @@
 package Entidades;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -26,7 +30,8 @@ import javax.persistence.Table;
     @NamedQuery(name = "Hospital.findAll", query = "SELECT h FROM Hospital h"),
     @NamedQuery(name = "Hospital.findById", query = "SELECT h FROM Hospital h WHERE h.id = :id"),
     @NamedQuery(name = "Hospital.findByNombreHospital", query = "SELECT h FROM Hospital h WHERE h.nombreHospital = :nombreHospital"),
-    @NamedQuery(name = "Hospital.findBySeguroDeGatosMedicos", query = "SELECT h FROM Hospital h WHERE h.seguroDeGatosMedicos = :seguroDeGatosMedicos")})
+    @NamedQuery(name = "Hospital.findBySeguroDeGatosMedicos", query = "SELECT h FROM Hospital h WHERE h.seguroDeGatosMedicos = :seguroDeGatosMedicos"),
+    @NamedQuery(name = "Hospital.findByOcupacion", query = "SELECT h FROM Hospital h WHERE h.ocupacion = :ocupacion")})
 public class Hospital implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,7 +45,15 @@ public class Hospital implements Serializable {
     private String nombreHospital;
     @Basic(optional = false)
     @Column(name = "SeguroDeGatosMedicos")
-    private String seguroDeGatosMedicos;
+    private char seguroDeGatosMedicos;
+    @Basic(optional = false)
+    @Column(name = "ocupacion")
+    private String ocupacion;
+    @OneToMany(mappedBy = "idHospitales")
+    private List<Paciente> pacienteList;
+    @JoinColumn(name = "id_vacuna_hospitales", referencedColumnName = "ID")
+    @ManyToOne
+    private Vacunas idVacunaHospitales;
 
     public Hospital() {
     }
@@ -49,10 +62,11 @@ public class Hospital implements Serializable {
         this.id = id;
     }
 
-    public Hospital(Integer id, String nombreHospital, String seguroDeGatosMedicos) {
+    public Hospital(Integer id, String nombreHospital, char seguroDeGatosMedicos, String ocupacion) {
         this.id = id;
         this.nombreHospital = nombreHospital;
         this.seguroDeGatosMedicos = seguroDeGatosMedicos;
+        this.ocupacion = ocupacion;
     }
 
     public Integer getId() {
@@ -71,12 +85,37 @@ public class Hospital implements Serializable {
         this.nombreHospital = nombreHospital;
     }
 
-    public String getSeguroDeGatosMedicos() {
+    public char getSeguroDeGatosMedicos() {
         return seguroDeGatosMedicos;
     }
 
-    public void setSeguroDeGatosMedicos(String seguroDeGatosMedicos) {
+    public void setSeguroDeGatosMedicos(char seguroDeGatosMedicos) {
         this.seguroDeGatosMedicos = seguroDeGatosMedicos;
+    }
+
+    public String getOcupacion() {
+        return ocupacion;
+    }
+
+    public void setOcupacion(String ocupacion) {
+        this.ocupacion = ocupacion;
+    }
+
+    public List<Paciente> getPacienteList() {
+        return pacienteList;
+    }
+
+    public void setPacienteList(List<Paciente> pacienteList) {
+        this.pacienteList = pacienteList;
+    }
+
+    public Vacunas getIdVacunaHospitales() {
+       
+        return idVacunaHospitales;
+    }
+
+    public void setIdVacunaHospitales(Vacunas idVacunaHospitales) {
+        this.idVacunaHospitales = idVacunaHospitales;
     }
 
     @Override
@@ -104,4 +143,36 @@ public class Hospital implements Serializable {
         return "Entidades.Hospital[ id=" + id + " ]";
     }
     
+    public class ComboItem {
+    private int id;
+    private String descripcion;
+
+    public ComboItem(int id, String descripcion) {
+        this.id = id;
+        this.descripcion = descripcion;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    @Override
+    public String toString() {
+        return descripcion;
+    }
+    
+    
+}
 }

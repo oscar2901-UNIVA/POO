@@ -90,17 +90,18 @@ public class registroVacuna extends javax.swing.JFrame {
         });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1334, 844));
         getContentPane().setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Nombre de la vacuna:");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(90, 170, 180, 50);
+        jLabel1.setBounds(540, 180, 180, 50);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Cantidad:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(90, 230, 110, 30);
+        jLabel2.setBounds(610, 250, 110, 30);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -116,7 +117,7 @@ public class registroVacuna extends javax.swing.JFrame {
         jScrollPane3.setViewportView(tblVacunas);
 
         getContentPane().add(jScrollPane3);
-        jScrollPane3.setBounds(150, 460, 560, 250);
+        jScrollPane3.setBounds(410, 440, 560, 250);
 
         btnModificar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnModificar.setText("Modificar");
@@ -127,7 +128,7 @@ public class registroVacuna extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnModificar);
-        btnModificar.setBounds(390, 370, 130, 31);
+        btnModificar.setBounds(680, 360, 130, 31);
 
         btnEliminar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnEliminar.setText("Eliminar");
@@ -138,7 +139,7 @@ public class registroVacuna extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnEliminar);
-        btnEliminar.setBounds(530, 370, 130, 31);
+        btnEliminar.setBounds(820, 360, 130, 31);
 
         jLimpiar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLimpiar.setText("limpiar campos");
@@ -148,7 +149,7 @@ public class registroVacuna extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jLimpiar);
-        jLimpiar.setBounds(230, 370, 151, 31);
+        jLimpiar.setBounds(510, 360, 151, 31);
 
         btnAgregar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnAgregar.setText("Agregar");
@@ -159,7 +160,7 @@ public class registroVacuna extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAgregar);
-        btnAgregar.setBounds(40, 370, 170, 31);
+        btnAgregar.setBounds(330, 360, 170, 31);
 
         btnSalir.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnSalir.setText("Salir");
@@ -169,11 +170,11 @@ public class registroVacuna extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnSalir);
-        btnSalir.setBounds(670, 370, 120, 31);
+        btnSalir.setBounds(960, 360, 120, 31);
         getContentPane().add(txtNombreVacuna);
-        txtNombreVacuna.setBounds(300, 180, 190, 30);
+        txtNombreVacuna.setBounds(720, 190, 190, 30);
         getContentPane().add(txtCantidadVacunas);
-        txtCantidadVacunas.setBounds(300, 230, 190, 30);
+        txtCantidadVacunas.setBounds(720, 250, 190, 30);
 
         btnRegresarMenuPrinc1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnRegresarMenuPrinc1.setText("Regresar al menu principal");
@@ -183,11 +184,11 @@ public class registroVacuna extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnRegresarMenuPrinc1);
-        btnRegresarMenuPrinc1.setBounds(270, 720, 310, 60);
+        btnRegresarMenuPrinc1.setBounds(540, 710, 310, 60);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/covid19/imagenfONDO.png"))); // NOI18N
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(0, 0, 920, 844);
+        jLabel3.setBounds(0, 0, 1340, 844);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

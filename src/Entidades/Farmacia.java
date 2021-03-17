@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -44,7 +46,10 @@ public class Farmacia implements Serializable {
     private String municipio;
     @Basic(optional = false)
     @Column(name = "vacunas")
-    private String vacunas;
+    private char vacunas;
+    @JoinColumn(name = "id_vacuna_farmacia", referencedColumnName = "ID")
+    @ManyToOne
+    private Vacunas idVacunaFarmacia;
 
     public Farmacia() {
     }
@@ -53,7 +58,7 @@ public class Farmacia implements Serializable {
         this.id = id;
     }
 
-    public Farmacia(Integer id, String nombreFarmacia, String municipio, String vacunas) {
+    public Farmacia(Integer id, String nombreFarmacia, String municipio, char vacunas) {
         this.id = id;
         this.nombreFarmacia = nombreFarmacia;
         this.municipio = municipio;
@@ -84,12 +89,20 @@ public class Farmacia implements Serializable {
         this.municipio = municipio;
     }
 
-    public String getVacunas() {
+    public char getVacunas() {
         return vacunas;
     }
 
-    public void setVacunas(String vacunas) {
+    public void setVacunas(char vacunas) {
         this.vacunas = vacunas;
+    }
+
+    public Vacunas getIdVacunaFarmacia() {
+        return idVacunaFarmacia;
+    }
+
+    public void setIdVacunaFarmacia(Vacunas idVacunaFarmacia) {
+        this.idVacunaFarmacia = idVacunaFarmacia;
     }
 
     @Override

@@ -8,14 +8,15 @@ package Controladores;
 import Controladores.exceptions.NonexistentEntityException;
 import Entidades.Farmacia;
 import java.io.Serializable;
+import javax.persistence.Query;
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import Entidades.Vacunas;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Query;
-import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 
 /**
  *
@@ -26,12 +27,11 @@ public class FarmaciaJpaController implements Serializable {
     public FarmaciaJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
+    private EntityManagerFactory emf = null;
 
     public FarmaciaJpaController() {
         this.emf = Persistence.createEntityManagerFactory("covid19PU");
     }
-    
-    private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
@@ -42,7 +42,16 @@ public class FarmaciaJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Vacunas idVacunaFarmacia = farmacia.getIdVacunaFarmacia();
+            if (idVacunaFarmacia != null) {
+                idVacunaFarmacia = em.getReference(idVacunaFarmacia.getClass(), idVacunaFarmacia.getId());
+                farmacia.setIdVacunaFarmacia(idVacunaFarmacia);
+            }
             em.persist(farmacia);
+            if (idVacunaFarmacia != null) {
+                idVacunaFarmacia.getFarmaciaList().add(farmacia);
+                idVacunaFarmacia = em.merge(idVacunaFarmacia);
+            }
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -56,7 +65,22 @@ public class FarmaciaJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Farmacia persistentFarmacia = em.find(Farmacia.class, farmacia.getId());
+            Vacunas idVacunaFarmaciaOld = persistentFarmacia.getIdVacunaFarmacia();
+            Vacunas idVacunaFarmaciaNew = farmacia.getIdVacunaFarmacia();
+            if (idVacunaFarmaciaNew != null) {
+                idVacunaFarmaciaNew = em.getReference(idVacunaFarmaciaNew.getClass(), idVacunaFarmaciaNew.getId());
+                farmacia.setIdVacunaFarmacia(idVacunaFarmaciaNew);
+            }
             farmacia = em.merge(farmacia);
+            if (idVacunaFarmaciaOld != null && !idVacunaFarmaciaOld.equals(idVacunaFarmaciaNew)) {
+                idVacunaFarmaciaOld.getFarmaciaList().remove(farmacia);
+                idVacunaFarmaciaOld = em.merge(idVacunaFarmaciaOld);
+            }
+            if (idVacunaFarmaciaNew != null && !idVacunaFarmaciaNew.equals(idVacunaFarmaciaOld)) {
+                idVacunaFarmaciaNew.getFarmaciaList().add(farmacia);
+                idVacunaFarmaciaNew = em.merge(idVacunaFarmaciaNew);
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -85,6 +109,11 @@ public class FarmaciaJpaController implements Serializable {
                 farmacia.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The farmacia with id " + id + " no longer exists.", enfe);
+            }
+            Vacunas idVacunaFarmacia = farmacia.getIdVacunaFarmacia();
+            if (idVacunaFarmacia != null) {
+                idVacunaFarmacia.getFarmaciaList().remove(farmacia);
+                idVacunaFarmacia = em.merge(idVacunaFarmacia);
             }
             em.remove(farmacia);
             em.getTransaction().commit();

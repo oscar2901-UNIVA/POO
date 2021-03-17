@@ -2,10 +2,15 @@
 package covid19;
 
 
+import Controladores.HospitalJpaController;
+import Controladores.PacienteJpaController;
 import Controladores.UsuariosJpaController;
+import Controladores.VacunasJpaController;
 import Controladores.exceptions.NonexistentEntityException;
+import Entidades.Paciente;
 
 import Entidades.Usuarios;
+import Entidades.Vacunas;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
 
 public class registroUsuario extends javax.swing.JFrame {
 
@@ -22,7 +28,24 @@ public class registroUsuario extends javax.swing.JFrame {
         cargaTabla();
         limpiar();
     }
-    
+//    public void cargaCombo(){
+//        
+//        VacunasJpaController pc = new VacunasJpaController();
+//        HospitalJpaController oscar = new HospitalJpaController();
+//        List<Paciente> listap = oscar.F
+//        List<Vacunas> lista = pc.findVacunasEntities();
+//        ComboItem item;
+//        for(Vacunas p:lista){
+//            item = new ComboItem(p.getId(), p.getNombreDeVacuna());
+//            jComboBox1.addItem(item);
+//        }
+//        for(Paciente p:listap){
+//            item = new ComboItem(p.getId(), p.getNombre());
+//            cmbPacientes.addItem(item);
+//            
+//        }
+//   
+//    }
    private void cargaTabla(){
         DefaultTableModel dtm = new DefaultTableModel();
         dtm.addColumn("ID");
@@ -70,6 +93,7 @@ public class registroUsuario extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1334, 844));
         getContentPane().setLayout(null);
 
         tblUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -80,17 +104,17 @@ public class registroUsuario extends javax.swing.JFrame {
         jScrollPane3.setViewportView(tblUsuarios);
 
         getContentPane().add(jScrollPane3);
-        jScrollPane3.setBounds(140, 460, 560, 250);
+        jScrollPane3.setBounds(140, 460, 970, 250);
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel3.setText("Usuario:");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(60, 130, 74, 24);
+        jLabel3.setBounds(490, 140, 74, 24);
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel4.setText("Contraseña:");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(60, 180, 107, 24);
+        jLabel4.setBounds(490, 200, 107, 24);
 
         txtNombreUsuarioRegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,7 +122,7 @@ public class registroUsuario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtNombreUsuarioRegistro);
-        txtNombreUsuarioRegistro.setBounds(200, 140, 246, 30);
+        txtNombreUsuarioRegistro.setBounds(610, 140, 246, 30);
 
         txttContraseñaUsuarioRegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,7 +130,7 @@ public class registroUsuario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txttContraseñaUsuarioRegistro);
-        txttContraseñaUsuarioRegistro.setBounds(200, 190, 245, 30);
+        txttContraseñaUsuarioRegistro.setBounds(610, 200, 245, 30);
 
         btnModificar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnModificar.setText("Modificar");
@@ -117,7 +141,7 @@ public class registroUsuario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnModificar);
-        btnModificar.setBounds(390, 370, 130, 31);
+        btnModificar.setBounds(680, 370, 130, 31);
 
         btnEliminar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnEliminar.setText("Eliminar");
@@ -128,7 +152,7 @@ public class registroUsuario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnEliminar);
-        btnEliminar.setBounds(530, 370, 130, 31);
+        btnEliminar.setBounds(840, 370, 130, 31);
 
         jLimpiar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLimpiar.setText("limpiar campos");
@@ -138,7 +162,7 @@ public class registroUsuario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jLimpiar);
-        jLimpiar.setBounds(230, 370, 151, 31);
+        jLimpiar.setBounds(510, 370, 151, 31);
 
         btnAgregar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnAgregar.setText("Agregar");
@@ -149,7 +173,7 @@ public class registroUsuario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAgregar);
-        btnAgregar.setBounds(40, 370, 170, 31);
+        btnAgregar.setBounds(310, 370, 170, 31);
 
         btnSalir.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnSalir.setText("Salir");
@@ -159,7 +183,7 @@ public class registroUsuario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnSalir);
-        btnSalir.setBounds(670, 370, 120, 31);
+        btnSalir.setBounds(990, 370, 120, 31);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -175,11 +199,11 @@ public class registroUsuario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnRegresarMenuPrinc);
-        btnRegresarMenuPrinc.setBounds(270, 720, 310, 60);
+        btnRegresarMenuPrinc.setBounds(530, 720, 310, 60);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/covid19/imagenfONDO.png"))); // NOI18N
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(0, 0, 870, 850);
+        jLabel2.setBounds(0, 0, 1330, 840);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

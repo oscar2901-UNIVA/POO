@@ -13,6 +13,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -69,6 +71,12 @@ public class Paciente implements Serializable {
     @Basic(optional = false)
     @Column(name = "CodigoPostal")
     private int codigoPostal;
+    @JoinColumn(name = "id_hospitales", referencedColumnName = "ID")
+    @ManyToOne
+    private Hospital idHospitales;
+    @JoinColumn(name = "id_vacuna_paciente", referencedColumnName = "ID")
+    @ManyToOne
+    private Vacunas idVacunaPaciente;
 
     public Paciente() {
     }
@@ -159,6 +167,22 @@ public class Paciente implements Serializable {
 
     public void setCodigoPostal(int codigoPostal) {
         this.codigoPostal = codigoPostal;
+    }
+
+    public Hospital getIdHospitales() {
+        return idHospitales;
+    }
+
+    public void setIdHospitales(Hospital idHospitales) {
+        this.idHospitales = idHospitales;
+    }
+
+    public Vacunas getIdVacunaPaciente() {
+        return idVacunaPaciente;
+    }
+
+    public void setIdVacunaPaciente(Vacunas idVacunaPaciente) {
+        this.idVacunaPaciente = idVacunaPaciente;
     }
 
     @Override

@@ -6,6 +6,7 @@
 package Entidades;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -41,6 +43,12 @@ public class Vacunas implements Serializable {
     @Basic(optional = false)
     @Column(name = "Cantidad")
     private int cantidad;
+    @OneToMany(mappedBy = "idVacunaPaciente")
+    private List<Paciente> pacienteList;
+    @OneToMany(mappedBy = "idVacunaFarmacia")
+    private List<Farmacia> farmaciaList;
+    @OneToMany(mappedBy = "idVacunaHospitales")
+    private List<Hospital> hospitalList;
 
     public Vacunas() {
     }
@@ -77,6 +85,30 @@ public class Vacunas implements Serializable {
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
+    }
+
+    public List<Paciente> getPacienteList() {
+        return pacienteList;
+    }
+
+    public void setPacienteList(List<Paciente> pacienteList) {
+        this.pacienteList = pacienteList;
+    }
+
+    public List<Farmacia> getFarmaciaList() {
+        return farmaciaList;
+    }
+
+    public void setFarmaciaList(List<Farmacia> farmaciaList) {
+        this.farmaciaList = farmaciaList;
+    }
+
+    public List<Hospital> getHospitalList() {
+        return hospitalList;
+    }
+
+    public void setHospitalList(List<Hospital> hospitalList) {
+        this.hospitalList = hospitalList;
     }
 
     @Override

@@ -59,6 +59,7 @@ public class registroFarmacia extends javax.swing.JFrame {
         }
         tblFarmacia.setModel(dtm);
     }
+    
         public void cargaCombo(){
         VacunasJpaController pc = new VacunasJpaController();
         List<Vacunas> lista = pc.findVacunasEntities();

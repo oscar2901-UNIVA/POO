@@ -266,7 +266,6 @@ public class registroFarmacia extends javax.swing.JFrame {
         char Svacuna;
         Svacuna = (Rsi.isSelected())?'S':'N';
         far.setVacunas(Svacuna); 
-        
         int numero = cmbVacuna.getSelectedIndex();
         switch(numero){
             case 0: far.setIdVacunaFarmacia(new Vacunas(1));

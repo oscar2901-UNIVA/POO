@@ -45,7 +45,7 @@ public class Hospital implements Serializable {
     private String nombreHospital;
     @Basic(optional = false)
     @Column(name = "SeguroDeGatosMedicos")
-    private char seguroDeGatosMedicos;
+    private String seguroDeGatosMedicos;
     @Basic(optional = false)
     @Column(name = "ocupacion")
     private String ocupacion;
@@ -62,7 +62,7 @@ public class Hospital implements Serializable {
         this.id = id;
     }
 
-    public Hospital(Integer id, String nombreHospital, char seguroDeGatosMedicos, String ocupacion) {
+    public Hospital(Integer id, String nombreHospital, String seguroDeGatosMedicos, String ocupacion) {
         this.id = id;
         this.nombreHospital = nombreHospital;
         this.seguroDeGatosMedicos = seguroDeGatosMedicos;
@@ -85,11 +85,11 @@ public class Hospital implements Serializable {
         this.nombreHospital = nombreHospital;
     }
 
-    public char getSeguroDeGatosMedicos() {
+    public String getSeguroDeGatosMedicos() {
         return seguroDeGatosMedicos;
     }
 
-    public void setSeguroDeGatosMedicos(char seguroDeGatosMedicos) {
+    public void setSeguroDeGatosMedicos(String seguroDeGatosMedicos) {
         this.seguroDeGatosMedicos = seguroDeGatosMedicos;
     }
 
@@ -110,7 +110,6 @@ public class Hospital implements Serializable {
     }
 
     public Vacunas getIdVacunaHospitales() {
-       
         return idVacunaHospitales;
     }
 
@@ -143,36 +142,4 @@ public class Hospital implements Serializable {
         return "Entidades.Hospital[ id=" + id + " ]";
     }
     
-    public class ComboItem {
-    private int id;
-    private String descripcion;
-
-    public ComboItem(int id, String descripcion) {
-        this.id = id;
-        this.descripcion = descripcion;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    @Override
-    public String toString() {
-        return descripcion;
-    }
-    
-    
-}
 }

@@ -5,6 +5,17 @@
  */
 package covid19;
 
+import Controladores.FarmaciaJpaController;
+import Controladores.HospitalJpaController;
+import Controladores.MedicamentosJpaController;
+import Controladores.VacunasJpaController;
+import Entidades.Farmacia;
+import Entidades.Hospital;
+import Entidades.Medicamentos;
+import Entidades.Vacunas;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author oscar
@@ -16,9 +27,133 @@ public class pacienteVista extends javax.swing.JFrame {
      */
     public pacienteVista() {
         initComponents();
+        cargaTablaFarmacia();
+        cargaTablaHospitales();
+        cargaTablaVacunas();
+        cargaTablaMedicamentos();
     }
 
-   
+    private void cargaTablaFarmacia(){
+        DefaultTableModel dtm = new DefaultTableModel();
+        dtm.addColumn("ID");
+        dtm.addColumn("Nombre farmacia");
+        dtm.addColumn("Municipio");
+        
+        dtm.addColumn("Nombre vacuna");
+        
+       
+        Object[] fila = new Object[5];
+        FarmaciaJpaController pc = new FarmaciaJpaController();
+        List<Farmacia> lista = pc.findFarmaciaEntities();
+        for(Farmacia p:lista){
+            fila[0]= p.getId();
+            fila[1]= p.getNombreFarmacia();
+            fila[2]= p.getMunicipio();
+            
+            fila[3]= p.getIdVacunaFarmacia().getNombreDeVacuna();
+     
+            dtm.addRow(fila);
+            
+        }
+        tablaFarmacias.setModel(dtm);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+     private void cargaTablaHospitales(){
+        DefaultTableModel dtm = new DefaultTableModel();
+        dtm.addColumn("ID");
+        dtm.addColumn("Nombre del hospital");
+        dtm.addColumn("Seguro de gatos medicos");
+        dtm.addColumn("ocupacion");
+        dtm.addColumn("Vacuna");
+        
+        
+       
+        Object[] fila = new Object[5];
+        HospitalJpaController pc = new HospitalJpaController();
+        List<Hospital> lista = pc.findHospitalEntities();
+        for(Hospital p:lista){
+            fila[0]= p.getId();
+            fila[1]= p.getNombreHospital();
+            fila[2]= p.getSeguroDeGatosMedicos();
+            fila[3]= p.getOcupacion();
+            fila[4]= p.getIdVacunaHospitales().getNombreDeVacuna();
+            
+     
+            dtm.addRow(fila);
+            
+        }
+        tablaHospitales1.setModel(dtm);
+        
+    }
+     
+     
+     
+     
+     
+      private void cargaTablaVacunas(){
+        DefaultTableModel dtm = new DefaultTableModel();
+        dtm.addColumn("ID");
+        dtm.addColumn("Nombre de vacuna");
+        dtm.addColumn("Cantidad");
+        
+       
+        Object[] fila = new Object[3];
+        VacunasJpaController pc = new VacunasJpaController();
+        List<Vacunas> lista = pc.findVacunasEntities();
+        for(Vacunas p:lista){
+            fila[0]= p.getId();
+            fila[1]= p.getNombreDeVacuna();
+            fila[2]= p.getCantidad();
+            
+     
+            dtm.addRow(fila);
+            
+        }
+        tablasVacunas.setModel(dtm);
+    }
+      
+      
+      
+       private void cargaTablaMedicamentos(){
+        DefaultTableModel dtm = new DefaultTableModel();
+        dtm.addColumn("ID");
+        dtm.addColumn("Nombre del medicamento");
+        dtm.addColumn("Precio");
+        
+       
+        Object[] fila = new Object[3];
+        MedicamentosJpaController pc = new MedicamentosJpaController();
+        List<Medicamentos> lista = pc.findMedicamentosEntities();
+        for(Medicamentos p:lista){
+            fila[0]= p.getId();
+            fila[1]= p.getNombreDeMedicamento();
+            fila[2]= p.getPrecio();
+            
+     
+            dtm.addRow(fila);
+            
+        }
+        tblMedicamentos.setModel(dtm);
+    }
+      
+      
+      
+      
+      
+      
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -26,14 +161,21 @@ public class pacienteVista extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jFrame1 = new javax.swing.JFrame();
         jMenu2 = new javax.swing.JMenu();
-        tablasDeDatos = new javax.swing.JTabbedPane();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tablaHospitales = new javax.swing.JTable();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tablasMedicamentos = new javax.swing.JTable();
+        tablaHospitales = new javax.swing.JTabbedPane();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tablaFarmacias = new javax.swing.JTable();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaFarmacia = new javax.swing.JTable();
+        tablaHospitales1 = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tablasVacunas = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblMedicamentos = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        btnSalir = new javax.swing.JButton();
+        btnaRegresarAlMenuPrincipal = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
 
         jMenu1.setText("jMenu1");
 
@@ -51,8 +193,12 @@ public class pacienteVista extends javax.swing.JFrame {
         jMenu2.setText("jMenu2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1338, 900));
+        getContentPane().setLayout(null);
 
-        tablaHospitales.setModel(new javax.swing.table.DefaultTableModel(
+        tablaHospitales.setToolTipText("");
+
+        tablaFarmacias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -63,11 +209,11 @@ public class pacienteVista extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(tablaHospitales);
+        jScrollPane6.setViewportView(tablaFarmacias);
 
-        tablasDeDatos.addTab("Hospitales", jScrollPane2);
+        tablaHospitales.addTab("Farmacias", jScrollPane6);
 
-        tablasMedicamentos.setModel(new javax.swing.table.DefaultTableModel(
+        tablaHospitales1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -78,11 +224,11 @@ public class pacienteVista extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane3.setViewportView(tablasMedicamentos);
+        jScrollPane1.setViewportView(tablaHospitales1);
 
-        tablasDeDatos.addTab("Medicamentos", jScrollPane3);
+        tablaHospitales.addTab("Hospitales", jScrollPane1);
 
-        tablaFarmacia.setModel(new javax.swing.table.DefaultTableModel(
+        tablasVacunas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -93,39 +239,78 @@ public class pacienteVista extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tablaFarmacia);
+        jScrollPane3.setViewportView(tablasVacunas);
 
-        tablasDeDatos.addTab("Farmacias", jScrollPane1);
+        tablaHospitales.addTab("Vacunas", jScrollPane3);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/covid19/imagenfONDO.png"))); // NOI18N
+        tblMedicamentos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tblMedicamentos);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(0, 193, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(333, Short.MAX_VALUE)
-                    .addComponent(tablasDeDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 859, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(335, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(0, 40, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(229, Short.MAX_VALUE)
-                    .addComponent(tablasDeDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(314, Short.MAX_VALUE)))
-        );
+        tablaHospitales.addTab("Medicamentos", jScrollPane2);
+
+        getContentPane().add(tablaHospitales);
+        tablaHospitales.setBounds(110, 90, 1140, 600);
+        tablaHospitales.getAccessibleContext().setAccessibleName("Vacunas");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Vista Paciente");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(600, 20, 230, 50);
+
+        btnSalir.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSalir);
+        btnSalir.setBounds(810, 720, 173, 60);
+
+        btnaRegresarAlMenuPrincipal.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnaRegresarAlMenuPrincipal.setText("Regresar al menu principal");
+        btnaRegresarAlMenuPrincipal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnaRegresarAlMenuPrincipalActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnaRegresarAlMenuPrincipal);
+        btnaRegresarAlMenuPrincipal.setBounds(390, 720, 270, 60);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenFondo/imagenfONDO.png"))); // NOI18N
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(0, 0, 1340, 840);
+
+        jLabel3.setText("jLabel3");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(140, 30, 34, 14);
+        setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        System.exit(WIDTH);
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnaRegresarAlMenuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaRegresarAlMenuPrincipalActionPerformed
+        Inicio inc = new Inicio();
+        inc.setVisible(true);
+        
+        this.dispose();
+        
+    }//GEN-LAST:event_btnaRegresarAlMenuPrincipalActionPerformed
 
    
     public static void main(String args[]) {
@@ -138,16 +323,23 @@ public class pacienteVista extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSalir;
+    private javax.swing.JButton btnaRegresarAlMenuPrincipal;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable tablaFarmacia;
-    private javax.swing.JTable tablaHospitales;
-    private javax.swing.JTabbedPane tablasDeDatos;
-    private javax.swing.JTable tablasMedicamentos;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JTable tablaFarmacias;
+    private javax.swing.JTabbedPane tablaHospitales;
+    private javax.swing.JTable tablaHospitales1;
+    private javax.swing.JTable tablasVacunas;
+    private javax.swing.JTable tblMedicamentos;
     // End of variables declaration//GEN-END:variables
 }

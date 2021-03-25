@@ -8,7 +8,6 @@ package covid19;
 import Controladores.FarmaciaJpaController;
 import Controladores.exceptions.NonexistentEntityException;
 import Entidades.Farmacia;
-import static Entidades.Farmacia_.vacunas;
 import Entidades.Hospital;
 import Entidades.Vacunas;
 import java.util.logging.Level;
@@ -40,7 +39,7 @@ public class registroFarmacia extends javax.swing.JFrame {
         dtm.addColumn("ID");
         dtm.addColumn("Nombre farmacia");
         dtm.addColumn("Municipio");
-        dtm.addColumn("Vacuna disponible");
+       
         dtm.addColumn("Nombre vacuna");
         
        
@@ -51,8 +50,8 @@ public class registroFarmacia extends javax.swing.JFrame {
             fila[0]= p.getId();
             fila[1]= p.getNombreFarmacia();
             fila[2]= p.getMunicipio();
-            fila[3]= p.getVacunas();
-            fila[4]= p.getIdVacunaFarmacia().getNombreDeVacuna();
+            
+            fila[3]= p.getIdVacunaFarmacia().getNombreDeVacuna();
      
             dtm.addRow(fila);
             
@@ -64,9 +63,17 @@ public class registroFarmacia extends javax.swing.JFrame {
         VacunasJpaController pc = new VacunasJpaController();
         List<Vacunas> lista = pc.findVacunasEntities();
         ComboItem item;
+//        ComboItem cantidad;
+        
         for(Vacunas p:lista){
             item = new ComboItem(p.getId(), p.getNombreDeVacuna());
-            cmbVacuna.addItem(item);
+//            cantidad = new ComboItem(p.getId(),Integer.toString(p.getCantidad()));
+            if (p.getCantidad()==0) {
+ 
+            }else{
+                cmbVacuna.addItem(item);
+//                cmbCantidadVacuna.add(cantidad);
+            }
         }
         
     }
@@ -105,10 +112,10 @@ public class registroFarmacia extends javax.swing.JFrame {
         btnRegresarMenuPrinc1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         cmbMunicipio = new javax.swing.JComboBox<>();
-        Rsi = new javax.swing.JRadioButton();
-        rNo = new javax.swing.JRadioButton();
         cmbVacuna = new javax.swing.JComboBox<>();
+        txtCantidadVacuna = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1334, 844));
@@ -122,7 +129,7 @@ public class registroFarmacia extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Municipio:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(440, 220, 110, 30);
+        jLabel2.setBounds(520, 240, 90, 30);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -149,7 +156,7 @@ public class registroFarmacia extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnModificar);
-        btnModificar.setBounds(640, 380, 130, 31);
+        btnModificar.setBounds(690, 420, 130, 31);
 
         btnEliminar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnEliminar.setText("Eliminar");
@@ -160,7 +167,7 @@ public class registroFarmacia extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnEliminar);
-        btnEliminar.setBounds(780, 380, 130, 31);
+        btnEliminar.setBounds(830, 420, 130, 31);
 
         jLimpiar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLimpiar.setText("limpiar campos");
@@ -170,7 +177,7 @@ public class registroFarmacia extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jLimpiar);
-        jLimpiar.setBounds(470, 380, 151, 31);
+        jLimpiar.setBounds(520, 420, 151, 31);
 
         btnAgregar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnAgregar.setText("Agregar");
@@ -181,7 +188,7 @@ public class registroFarmacia extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAgregar);
-        btnAgregar.setBounds(270, 380, 170, 31);
+        btnAgregar.setBounds(320, 420, 170, 31);
 
         btnSalir.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnSalir.setText("Salir");
@@ -191,7 +198,7 @@ public class registroFarmacia extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnSalir);
-        btnSalir.setBounds(940, 380, 120, 31);
+        btnSalir.setBounds(990, 420, 120, 31);
         getContentPane().add(txtNombreFarmacia);
         txtNombreFarmacia.setBounds(620, 170, 190, 30);
 
@@ -208,34 +215,22 @@ public class registroFarmacia extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("Vacunas:");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(440, 280, 80, 30);
+        jLabel5.setBounds(520, 310, 71, 30);
 
         cmbMunicipio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar:", "Zapopan", "Guadalajara", "Tlaquepaque", "El salto", "Ixtlahuacan", "Tlajomulco de zuñiga", "Juanacatlan", "Tonala", "Zapotlanejo" }));
         getContentPane().add(cmbMunicipio);
-        cmbMunicipio.setBounds(620, 220, 130, 30);
-
-        buttonGroup1.add(Rsi);
-        Rsi.setText("Si");
-        Rsi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RsiActionPerformed(evt);
-            }
-        });
-        getContentPane().add(Rsi);
-        Rsi.setBounds(600, 280, 33, 23);
-
-        buttonGroup1.add(rNo);
-        rNo.setText("No");
-        rNo.setToolTipText("");
-        getContentPane().add(rNo);
-        rNo.setBounds(600, 310, 40, 23);
+        cmbMunicipio.setBounds(620, 240, 130, 30);
 
         getContentPane().add(cmbVacuna);
-        cmbVacuna.setBounds(660, 290, 130, 22);
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/covid19/imagenfONDO.png"))); // NOI18N
+        cmbVacuna.setBounds(620, 310, 130, 30);
+        getContentPane().add(txtCantidadVacuna);
+        txtCantidadVacuna.setBounds(760, 310, 60, 30);
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(0, 0, 1380, 844);
+        jLabel3.setBounds(540, 330, 0, 0);
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenFondo/imagenfONDO.png"))); // NOI18N
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(0, 0, 1330, 840);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -244,11 +239,7 @@ public class registroFarmacia extends javax.swing.JFrame {
         int renglon = tblFarmacia.getSelectedRow();
         txtNombreFarmacia.setText(tblFarmacia.getValueAt(renglon, 1).toString());
         cmbMunicipio.setSelectedItem(tblFarmacia.getValueAt(renglon, 2).toString());
-        if(tblFarmacia.getValueAt(renglon, 3).equals('S')){
-            Rsi.setSelected(true);
-        }else{
-            rNo.setSelected(true);
-        }
+       
         
        
         btnModificar.setEnabled(true);
@@ -264,8 +255,7 @@ public class registroFarmacia extends javax.swing.JFrame {
         far.setNombreFarmacia(txtNombreFarmacia.getText());
         far.setMunicipio(cmbMunicipio.getSelectedItem().toString());
         char Svacuna;
-        Svacuna = (Rsi.isSelected())?'S':'N';
-        far.setVacunas(Svacuna); 
+        
         int numero = cmbVacuna.getSelectedIndex();
         switch(numero){
             case 0: far.setIdVacunaFarmacia(new Vacunas(1));
@@ -277,11 +267,22 @@ public class registroFarmacia extends javax.swing.JFrame {
             default: break;
         }
         Controladores.FarmaciaJpaController farma = new Controladores.FarmaciaJpaController();
+         Vacunas vac = new VacunasJpaController().findVacunas(numero+1);
+        int cantidad;
+        cantidad = (Integer.parseInt(txtCantidadVacuna.getText()));
+        cantidad = vac.getCantidad()- cantidad;
+        vac.setCantidad(cantidad);
+        try {
+            new VacunasJpaController().edit(vac);
+        } catch (Exception ex) {
+            Logger.getLogger(pacienteRegistro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         try {
             farma.edit(far);
             limpiar();
             cargaTabla();
-            btnModificar.setEnabled(false); //se desactiva el btn
+            btnModificar.setEnabled(false); 
         } catch (Exception ex) {
             Logger.getLogger(pacienteRegistro.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -312,8 +313,8 @@ public class registroFarmacia extends javax.swing.JFrame {
         far.setNombreFarmacia(txtNombreFarmacia.getText());
         far.setMunicipio(cmbMunicipio.getSelectedItem().toString());
         char Svacuna;
-        Svacuna = (Rsi.isSelected())?'S':'N';
-        far.setVacunas(Svacuna); 
+       
+        
         int numero = cmbVacuna.getSelectedIndex();
         switch(numero){
             case 0: far.setIdVacunaFarmacia(new Vacunas(1));
@@ -326,9 +327,33 @@ public class registroFarmacia extends javax.swing.JFrame {
         }
         Controladores.FarmaciaJpaController farma = new Controladores.FarmaciaJpaController();
         farma.create(far);
+        
+        Vacunas vac = new VacunasJpaController().findVacunas(numero+1);
+        int cantidad;
+        cantidad = (Integer.parseInt(txtCantidadVacuna.getText()));
+        cantidad = vac.getCantidad()- cantidad;
+        vac.setCantidad(cantidad);
+        
+        
+        if (vac.getCantidad()< cantidad) {
+            JOptionPane.showMessageDialog(this, "La canidad seleccionada es insuficiente");
+        } else {
+        }
+        
+        try {
+            new VacunasJpaController().edit(vac);
+        } catch (Exception ex) {
+            Logger.getLogger(pacienteRegistro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        
+        
         JOptionPane.showMessageDialog(this, "Farmacia agregada exitosamente");
         cargaTabla();
         limpiar();
+        cargaCombo();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -340,10 +365,6 @@ public class registroFarmacia extends javax.swing.JFrame {
         pac.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegresarMenuPrinc1ActionPerformed
-
-    private void RsiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RsiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_RsiActionPerformed
 
     /**
      * @param args the command line arguments
@@ -381,7 +402,6 @@ public class registroFarmacia extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JRadioButton Rsi;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnModificar;
@@ -398,10 +418,11 @@ public class registroFarmacia extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JButton jLimpiar;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JRadioButton rNo;
     private javax.swing.JTable tblFarmacia;
+    private javax.swing.JTextField txtCantidadVacuna;
     private javax.swing.JTextField txtNombreFarmacia;
     // End of variables declaration//GEN-END:variables
 }

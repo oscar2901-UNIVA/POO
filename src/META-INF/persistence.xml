@@ -3,10 +3,11 @@
   <persistence-unit name="covid19PU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>Entidades.Usuarios</class>
-    <class>Entidades.Hospital</class>
-    <class>Entidades.Paciente</class>
     <class>Entidades.Vacunas</class>
     <class>Entidades.Farmacia</class>
+    <class>Entidades.Hospital</class>
+    <class>Entidades.Medicamentos</class>
+    <class>Entidades.Paciente</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/proyectofinal?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

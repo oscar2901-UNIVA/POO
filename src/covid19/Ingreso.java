@@ -33,11 +33,11 @@ public class Ingreso extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
-        txtpassword = new javax.swing.JTextField();
         btnIngresar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         btnRegistrarme = new javax.swing.JButton();
+        txtPasswordFild = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
 
         jPasswordField1.setText("jPasswordField1");
@@ -63,8 +63,6 @@ public class Ingreso extends javax.swing.JFrame {
         });
         getContentPane().add(txtUsuario);
         txtUsuario.setBounds(610, 250, 161, 30);
-        getContentPane().add(txtpassword);
-        txtpassword.setBounds(620, 350, 161, 30);
 
         btnIngresar.setBackground(new java.awt.Color(204, 204, 204));
         btnIngresar.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
@@ -86,7 +84,7 @@ public class Ingreso extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnSalir);
-        btnSalir.setBounds(860, 620, 230, 40);
+        btnSalir.setBounds(850, 620, 230, 40);
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -103,8 +101,10 @@ public class Ingreso extends javax.swing.JFrame {
         });
         getContentPane().add(btnRegistrarme);
         btnRegistrarme.setBounds(640, 620, 190, 37);
+        getContentPane().add(txtPasswordFild);
+        txtPasswordFild.setBounds(610, 350, 170, 30);
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/covid19/imagenfONDO.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenFondo/imagenfONDO.png"))); // NOI18N
         getContentPane().add(jLabel3);
         jLabel3.setBounds(0, 0, 1340, 840);
 
@@ -121,36 +121,45 @@ public class Ingreso extends javax.swing.JFrame {
         UsuariosJpaController usu = new UsuariosJpaController();
         List<Usuarios> datos = usu.findUsuariosEntities();
         String nombreusuario = txtUsuario.getText();
-        String contra = txtpassword.getText();
-        boolean resultado = false;
+        String contra = txtPasswordFild.getText();
+        
+        boolean resultado1 = false;
+        int tipoUsu = 0;
+        
         for(Usuarios fila:datos){
                 if(fila.getUsuario().equals(nombreusuario)&&fila.getPassword().equals(contra)){
-                    resultado = true;
-                   
+                    resultado1 = true;
+                    tipoUsu = fila.getUserId();
                     break;
         }     
         }
-        if(resultado){
-            JOptionPane.showMessageDialog(this, "Bienvenido "+ nombreusuario );
+        
+        if(resultado1){
+            JOptionPane.showMessageDialog(this, "Bienvenido "+ nombreusuario);
+             
+            if (tipoUsu == 1) {
             this.dispose();
             new inicioAdministrados().setVisible(true);  
+            }else{
+            this.dispose();
+            new pacienteVista().setVisible(true);  
+            }
         }else{
             JOptionPane.showMessageDialog(this, "Nombre o usuario incorrecto" );
-        }
-  
         
-          
-
+        }
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void btnRegistrarmeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarmeActionPerformed
-        registroUsuario adm = new registroUsuario();
+        registroUsuariosPacienteAdministrador adm = new registroUsuariosPacienteAdministrador();
         adm.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegistrarmeActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        System.exit(WIDTH);
+         Inicio adm = new Inicio();
+        adm.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
     /**
@@ -197,7 +206,7 @@ public class Ingreso extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JPasswordField txtPasswordFild;
     private javax.swing.JTextField txtUsuario;
-    private javax.swing.JTextField txtpassword;
     // End of variables declaration//GEN-END:variables
 }

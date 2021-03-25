@@ -4,10 +4,12 @@ package covid19;
 
 
 import Controladores.HospitalJpaController;
+import Controladores.MedicamentosJpaController;
 import Controladores.PacienteJpaController;
 import Controladores.VacunasJpaController;
 import Controladores.exceptions.NonexistentEntityException;
 import Entidades.Hospital;
+import Entidades.Medicamentos;
 import Entidades.Paciente;
 import Entidades.Vacunas;
 import java.text.ParseException;
@@ -48,11 +50,12 @@ public class pacienteRegistro extends javax.swing.JFrame {
         dtm.addColumn("CP");
         dtm.addColumn("Vacuna");
         dtm.addColumn("Hospital");
+        dtm.addColumn("Medicamento");
        
-        Object[] fila = new Object[11];
+        Object[] fila = new Object[12];
         PacienteJpaController pc = new PacienteJpaController();
         List<Paciente> lista = pc.findPacienteEntities();
-        System.out.println(lista.get(0).getIdVacunaPaciente().getNombreDeVacuna());
+        System.out.println(lista.get(0).getIdVacunaPaciente().getId());
 //        for(Paciente p:lista){
 //            fila[0]= p.getId();
 //            fila[1]= p.getNombre();
@@ -84,6 +87,8 @@ public class pacienteRegistro extends javax.swing.JFrame {
             fila[8]= lista.get(i).getCodigoPostal();
             fila[9]= lista.get(i).getIdVacunaPaciente().getNombreDeVacuna();
             fila[10]= lista.get(i).getIdHospitales().getNombreHospital();
+            fila[11]= lista.get(i).getIdMedicamento().getNombreDeMedicamento();
+//            fila[11]= lista.get(i).getIdMedicamentoa();
             dtm.addRow(fila);
             
         }
@@ -102,27 +107,50 @@ public class pacienteRegistro extends javax.swing.JFrame {
         buttonGroup1.clearSelection();
        comboBoxHospital.setSelectedIndex(0);
        comboBoxVacuna.setSelectedIndex(0);
-        
+        cmbMedicamentos.setSelectedIndex(0);
     }
     
     
      public void cargaCombo(){
-        
+        comboBoxVacuna.removeAllItems();
+        comboBoxHospital.removeAllItems();
+        cmbMedicamentos.removeAllItems();
         VacunasJpaController pc = new VacunasJpaController();
         HospitalJpaController oscar = new HospitalJpaController();
+         MedicamentosJpaController medi = new MedicamentosJpaController();
         List<Hospital> listap = oscar.findHospitalEntities();
         List<Vacunas> lista = pc.findVacunasEntities();
+        List<Medicamentos> listam = medi.findMedicamentosEntities();
         ComboItem item;
+        
         for(Vacunas p:lista){
+            
             item = new ComboItem(p.getId(), p.getNombreDeVacuna());
-            comboBoxVacuna.addItem(item);
+            if (p.getCantidad()==0) {
+ 
+            }else{
+                comboBoxVacuna.addItem(item);
+            }
         }
         for(Hospital p:listap){
             item = new ComboItem(p.getId(), p.getNombreHospital());
-            comboBoxHospital.addItem(item);
+            if (p.getOcupacion().equals("Alta")) {
+ 
+            }else{
+                comboBoxHospital.addItem(item);
+            }
+            
             
         }
- 
+        for(Medicamentos p:listam){
+            item = new ComboItem(p.getId(), p.getNombreDeMedicamento());
+            if (p.getCantidad()==0) {
+                
+            } else {
+                cmbMedicamentos.addItem(item);
+            }
+            
+        }
        
        
     }
@@ -171,6 +199,9 @@ public class pacienteRegistro extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         comboBoxHospital = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        cmbMedicamentos = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -249,7 +280,7 @@ public class pacienteRegistro extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(tblPaciente);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 330, 1020, 290));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 1290, 290));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -350,17 +381,26 @@ public class pacienteRegistro extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel8.setText("Hospital:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 200, -1, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 200, -1, -1));
 
         comboBoxHospital.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBoxHospitalActionPerformed(evt);
             }
         });
-        getContentPane().add(comboBoxHospital, new org.netbeans.lib.awtextra.AbsoluteConstraints(937, 200, 110, 20));
+        getContentPane().add(comboBoxHospital, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 200, 110, 20));
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenFondo/imagenfONDO.png"))); // NOI18N
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 4, 970, 840));
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel10.setText("Medicamento:");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 200, -1, -1));
+
+        getContentPane().add(cmbMedicamentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 200, 120, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/covid19/imagenfONDO.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1330, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1320, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -415,14 +455,25 @@ public class pacienteRegistro extends javax.swing.JFrame {
             default: break;
         }
      
-        //no funciona
-        int numero2 = comboBoxVacuna.getSelectedIndex();
+    
+        int numero2 = comboBoxHospital.getSelectedIndex();
         switch(numero2){
             case 0: pac.setIdHospitales(new Hospital(1));
                     break; 
             case 1: pac.setIdHospitales(new Hospital(2));
                     break;
             case 2: pac.setIdHospitales(new Hospital(3));
+                    break;
+            default: break;
+        }
+        
+        int numero3 = cmbMedicamentos.getSelectedIndex();
+        switch(numero3){
+            case 0: pac.setIdMedicamento(new Medicamentos(1));
+                    break; 
+            case 1: pac.setIdMedicamento(new Medicamentos(2));
+                    break;
+            case 2: pac.setIdMedicamento(new Medicamentos(3));
                     break;
             default: break;
         }
@@ -485,7 +536,7 @@ public class pacienteRegistro extends javax.swing.JFrame {
         }
      
         
-        int numero2 = comboBoxVacuna.getSelectedIndex();
+        int numero2 = comboBoxHospital.getSelectedIndex();
         switch(numero2){
             case 0: pac.setIdHospitales(new Hospital(1));
                     break; 
@@ -496,11 +547,51 @@ public class pacienteRegistro extends javax.swing.JFrame {
             default: break;
         }
         
+        int numero3 = cmbMedicamentos.getSelectedIndex();
+        switch(numero3){
+            case 0: pac.setIdMedicamento(new Medicamentos(1));
+                    break; 
+            case 1: pac.setIdMedicamento(new Medicamentos(2));
+                    break;
+            case 2: pac.setIdMedicamento(new Medicamentos(3));
+                    break;
+            default: break;
+        }
+          
         Controladores.PacienteJpaController Oscar = new Controladores.PacienteJpaController();
         Oscar.create(pac);
+  
+        Vacunas vac = new VacunasJpaController().findVacunas(numero+1);
+        int cantidad = vac.getCantidad()-1;
+        vac.setCantidad(cantidad);
+        try {
+            new VacunasJpaController().edit(vac);
+        } catch (Exception ex) {
+            Logger.getLogger(pacienteRegistro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        Medicamentos med = new MedicamentosJpaController().findMedicamentos(numero+1);
+        int cantidadMed = med.getCantidad()-1;
+        med.setCantidad(cantidadMed);
+        try {
+            new MedicamentosJpaController().edit(med);
+        } catch (Exception ex) {
+            Logger.getLogger(pacienteRegistro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         JOptionPane.showMessageDialog(this, "Paciente agragado exitosamente");
         cargaTabla();
         limpiar();
+        cargaCombo();
         
     }//GEN-LAST:event_btnAgregarActionPerformed
 
@@ -626,9 +717,11 @@ public class pacienteRegistro extends javax.swing.JFrame {
     private javax.swing.JButton btnRegresarMenuPrinc;
     private javax.swing.JButton btnSalir;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<ComboItem> cmbMedicamentos;
     private javax.swing.JComboBox<ComboItem> comboBoxHospital;
     private javax.swing.JComboBox<ComboItem> comboBoxVacuna;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -640,6 +733,7 @@ public class pacienteRegistro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JButton jLimpiar;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable tblPaciente;

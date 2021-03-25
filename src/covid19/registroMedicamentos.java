@@ -5,54 +5,54 @@
  */
 package covid19;
 
-import Controladores.VacunasJpaController;
+import Controladores.MedicamentosJpaController;
 import Controladores.exceptions.NonexistentEntityException;
-import Entidades.Vacunas;
+import Entidades.Medicamentos;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-
 /**
  *
  * @author oscar
  */
-public class registroVacuna extends javax.swing.JFrame {
+public class registroMedicamentos extends javax.swing.JFrame {
 
     /**
-     * Creates new form registroVacuna
+     * Creates new form registroMedicamentos
      */
-    public registroVacuna() {
+    public registroMedicamentos() {
         initComponents();
         cargaTabla();
-        limpiar();
     }
-    private void cargaTabla(){
+    
+     private void cargaTabla(){
         DefaultTableModel dtm = new DefaultTableModel();
         dtm.addColumn("ID");
-        dtm.addColumn("Nombre de vacuna");
+        dtm.addColumn("Nombre del medicamento");
+        dtm.addColumn("Precio");
         dtm.addColumn("Cantidad");
         
        
-        Object[] fila = new Object[3];
-        VacunasJpaController pc = new VacunasJpaController();
-        List<Vacunas> lista = pc.findVacunasEntities();
-        for(Vacunas p:lista){
+        Object[] fila = new Object[4];
+        MedicamentosJpaController pc = new MedicamentosJpaController();
+        List<Medicamentos> lista = pc.findMedicamentosEntities();
+        for(Medicamentos p:lista){
             fila[0]= p.getId();
-            fila[1]= p.getNombreDeVacuna();
-            fila[2]= p.getCantidad();
-            
-     
+            fila[1]= p.getNombreDeMedicamento();
+            fila[2]= p.getPrecio();
+            fila[3] = p.getCantidad();
             dtm.addRow(fila);
             
         }
-        tblVacunas.setModel(dtm);
+        tblMedicamentos.setModel(dtm);
     }
 //    
     private void limpiar(){
-        txtNombreVacuna.setText("");
-        txtCantidadVacunas.setText("");
+        txtNombreMedicamento.setText("");
+        txtPrecioMedicamento.setText("");
+        txtCantidadMedicamento.setText("");
         
     }
 
@@ -65,56 +65,49 @@ public class registroVacuna extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnRegresarMenuPrinc = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tblVacunas = new javax.swing.JTable();
+        tblMedicamentos = new javax.swing.JTable();
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         jLimpiar = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
-        txtNombreVacuna = new javax.swing.JTextField();
-        txtCantidadVacunas = new javax.swing.JTextField();
+        txtNombreMedicamento = new javax.swing.JTextField();
+        txtPrecioMedicamento = new javax.swing.JTextField();
         btnRegresarMenuPrinc1 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        txtCantidadMedicamento = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
 
-        btnRegresarMenuPrinc.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btnRegresarMenuPrinc.setText("Regresar al menu principal");
-        btnRegresarMenuPrinc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegresarMenuPrincActionPerformed(evt);
-            }
-        });
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1334, 844));
+        setMinimumSize(new java.awt.Dimension(1387, 900));
         getContentPane().setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("Nombre de la vacuna:");
+        jLabel1.setText("Nombre del medicamento:");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(540, 180, 180, 50);
+        jLabel1.setBounds(540, 180, 210, 50);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel2.setText("Cantidad:");
+        jLabel2.setText("Precio:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(640, 250, 80, 30);
+        jLabel2.setBounds(690, 250, 60, 30);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Registro Vacunas");
+        jLabel4.setText("Registro Medicamentos");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(600, 0, 290, 80);
+        jLabel4.setBounds(570, 0, 380, 80);
 
-        tblVacunas.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblMedicamentos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblVacunasMouseClicked(evt);
+                tblMedicamentosMouseClicked(evt);
             }
         });
-        jScrollPane3.setViewportView(tblVacunas);
+        jScrollPane3.setViewportView(tblMedicamentos);
 
         getContentPane().add(jScrollPane3);
         jScrollPane3.setBounds(410, 440, 560, 250);
@@ -128,7 +121,7 @@ public class registroVacuna extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnModificar);
-        btnModificar.setBounds(680, 360, 130, 31);
+        btnModificar.setBounds(680, 360, 130, 38);
 
         btnEliminar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnEliminar.setText("Eliminar");
@@ -139,7 +132,7 @@ public class registroVacuna extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnEliminar);
-        btnEliminar.setBounds(820, 360, 130, 31);
+        btnEliminar.setBounds(820, 360, 130, 38);
 
         jLimpiar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLimpiar.setText("limpiar campos");
@@ -149,7 +142,7 @@ public class registroVacuna extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jLimpiar);
-        jLimpiar.setBounds(510, 360, 151, 31);
+        jLimpiar.setBounds(510, 360, 148, 38);
 
         btnAgregar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnAgregar.setText("Agregar");
@@ -160,7 +153,7 @@ public class registroVacuna extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAgregar);
-        btnAgregar.setBounds(330, 360, 170, 31);
+        btnAgregar.setBounds(330, 360, 170, 38);
 
         btnSalir.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnSalir.setText("Salir");
@@ -170,11 +163,17 @@ public class registroVacuna extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnSalir);
-        btnSalir.setBounds(960, 360, 120, 31);
-        getContentPane().add(txtNombreVacuna);
-        txtNombreVacuna.setBounds(720, 190, 190, 30);
-        getContentPane().add(txtCantidadVacunas);
-        txtCantidadVacunas.setBounds(720, 250, 190, 30);
+        btnSalir.setBounds(960, 360, 120, 38);
+
+        txtNombreMedicamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreMedicamentoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtNombreMedicamento);
+        txtNombreMedicamento.setBounds(760, 190, 190, 30);
+        getContentPane().add(txtPrecioMedicamento);
+        txtPrecioMedicamento.setBounds(760, 250, 190, 30);
 
         btnRegresarMenuPrinc1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnRegresarMenuPrinc1.setText("Regresar al menu principal");
@@ -186,48 +185,56 @@ public class registroVacuna extends javax.swing.JFrame {
         getContentPane().add(btnRegresarMenuPrinc1);
         btnRegresarMenuPrinc1.setBounds(540, 710, 310, 60);
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel5.setText("Cantidad:");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(669, 300, 80, 22);
+        getContentPane().add(txtCantidadMedicamento);
+        txtCantidadMedicamento.setBounds(760, 300, 190, 30);
+
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenFondo/imagenfONDO.png"))); // NOI18N
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(0, 4, 1340, 840);
+        jLabel3.setBounds(0, 10, 1330, 830);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tblVacunasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVacunasMouseClicked
-        int renglon = tblVacunas.getSelectedRow();
-        txtNombreVacuna.setText(tblVacunas.getValueAt(renglon, 1).toString());
-        txtCantidadVacunas.setText(tblVacunas.getValueAt(renglon, 2).toString());
-
+    private void tblMedicamentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMedicamentosMouseClicked
+        int renglon = tblMedicamentos.getSelectedRow();
+        txtNombreMedicamento.setText(tblMedicamentos.getValueAt(renglon, 1).toString());
+        txtPrecioMedicamento.setText(tblMedicamentos.getValueAt(renglon, 2).toString());
+        txtCantidadMedicamento.setText(tblMedicamentos.getValueAt(renglon, 3).toString());
         btnModificar.setEnabled(true);
         btnEliminar.setEnabled(true);
-    }//GEN-LAST:event_tblVacunasMouseClicked
+    }//GEN-LAST:event_tblMedicamentosMouseClicked
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
 
-        int renglon = tblVacunas.getSelectedRow();
-        int id =  (int)tblVacunas.getValueAt(renglon, 0);
-        Vacunas us = new Vacunas();
-        us.setId(id);
-        us.setNombreDeVacuna(txtNombreVacuna.getText());
-        us.setCantidad(Integer.parseInt(txtCantidadVacunas.getText()));
-        
-
-        VacunasJpaController oscar = new VacunasJpaController();
+        int renglon = tblMedicamentos.getSelectedRow();
+        int id =  (int)tblMedicamentos.getValueAt(renglon, 0);
+        Medicamentos MED = new Medicamentos();
+        MED.setId(id);
+        MED.setNombreDeMedicamento(txtNombreMedicamento.getText());
+        MED.setPrecio(Float.parseFloat(txtPrecioMedicamento.getText()));
+        MED.setCantidad(Integer.parseInt(txtCantidadMedicamento.getText()));
+        MedicamentosJpaController oscar = new MedicamentosJpaController();
         try {
-            oscar.edit(us);
+            oscar.edit(MED);
             limpiar();
             cargaTabla();
             btnModificar.setEnabled(false); //se desactiva el btn
         } catch (Exception ex) {
             Logger.getLogger(pacienteRegistro.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
 
-        int renglon = tblVacunas.getSelectedRow();
-        int id =  (int)tblVacunas.getValueAt(renglon, 0);
-        VacunasJpaController oscar = new VacunasJpaController();
+        int renglon = tblMedicamentos.getSelectedRow();
+        int id =  (int)tblMedicamentos.getValueAt(renglon, 0);
+        MedicamentosJpaController oscar = new MedicamentosJpaController();
         try {
             oscar.destroy(id);
             limpiar();
@@ -244,13 +251,15 @@ public class registroVacuna extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         //
-        Vacunas vac = new Vacunas();
-        vac.setNombreDeVacuna(txtNombreVacuna.getText());
-        vac.setCantidad(Integer.parseInt(txtCantidadVacunas.getText()));
+        Medicamentos vac = new Medicamentos();
+        vac.setNombreDeMedicamento(txtNombreMedicamento.getText());
+        vac.setPrecio(Float.parseFloat(txtPrecioMedicamento.getText()));
+        vac.setCantidad(Integer.parseInt(txtCantidadMedicamento.getText()));
         
-        Controladores.VacunasJpaController Oscar = new Controladores.VacunasJpaController();
+
+        Controladores.MedicamentosJpaController Oscar = new Controladores.MedicamentosJpaController();
         Oscar.create(vac);
-        JOptionPane.showMessageDialog(this, "Vacuna agregada exitosamente");
+        JOptionPane.showMessageDialog(this, "Medicamentos agregada exitosamente");
         cargaTabla();
         limpiar();
     }//GEN-LAST:event_btnAgregarActionPerformed
@@ -259,17 +268,15 @@ public class registroVacuna extends javax.swing.JFrame {
         System.exit(WIDTH);
     }//GEN-LAST:event_btnSalirActionPerformed
 
-    private void btnRegresarMenuPrincActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarMenuPrincActionPerformed
-        inicioAdministrados pac = new  inicioAdministrados();
-        pac.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnRegresarMenuPrincActionPerformed
-
     private void btnRegresarMenuPrinc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarMenuPrinc1ActionPerformed
         inicioAdministrados pac = new  inicioAdministrados();
         pac.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegresarMenuPrinc1ActionPerformed
+
+    private void txtNombreMedicamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreMedicamentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreMedicamentoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -288,20 +295,20 @@ public class registroVacuna extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(registroVacuna.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(registroMedicamentos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(registroVacuna.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(registroMedicamentos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(registroVacuna.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(registroMedicamentos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(registroVacuna.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(registroMedicamentos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new registroVacuna().setVisible(true);
+                new registroMedicamentos().setVisible(true);
             }
         });
     }
@@ -310,17 +317,18 @@ public class registroVacuna extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnModificar;
-    private javax.swing.JButton btnRegresarMenuPrinc;
     private javax.swing.JButton btnRegresarMenuPrinc1;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JButton jLimpiar;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable tblVacunas;
-    private javax.swing.JTextField txtCantidadVacunas;
-    private javax.swing.JTextField txtNombreVacuna;
+    private javax.swing.JTable tblMedicamentos;
+    private javax.swing.JTextField txtCantidadMedicamento;
+    private javax.swing.JTextField txtNombreMedicamento;
+    private javax.swing.JTextField txtPrecioMedicamento;
     // End of variables declaration//GEN-END:variables
 }

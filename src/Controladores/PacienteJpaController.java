@@ -12,8 +12,9 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import Entidades.Hospital;
-import Entidades.Paciente;
 import Entidades.Vacunas;
+import Entidades.Medicamentos;
+import Entidades.Paciente;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -53,6 +54,11 @@ public class PacienteJpaController implements Serializable {
                 idVacunaPaciente = em.getReference(idVacunaPaciente.getClass(), idVacunaPaciente.getId());
                 paciente.setIdVacunaPaciente(idVacunaPaciente);
             }
+            Medicamentos idMedicamento = paciente.getIdMedicamento();
+            if (idMedicamento != null) {
+                idMedicamento = em.getReference(idMedicamento.getClass(), idMedicamento.getId());
+                paciente.setIdMedicamento(idMedicamento);
+            }
             em.persist(paciente);
             if (idHospitales != null) {
                 idHospitales.getPacienteList().add(paciente);
@@ -61,6 +67,10 @@ public class PacienteJpaController implements Serializable {
             if (idVacunaPaciente != null) {
                 idVacunaPaciente.getPacienteList().add(paciente);
                 idVacunaPaciente = em.merge(idVacunaPaciente);
+            }
+            if (idMedicamento != null) {
+                idMedicamento.getPacienteList().add(paciente);
+                idMedicamento = em.merge(idMedicamento);
             }
             em.getTransaction().commit();
         } finally {
@@ -80,6 +90,8 @@ public class PacienteJpaController implements Serializable {
             Hospital idHospitalesNew = paciente.getIdHospitales();
             Vacunas idVacunaPacienteOld = persistentPaciente.getIdVacunaPaciente();
             Vacunas idVacunaPacienteNew = paciente.getIdVacunaPaciente();
+            Medicamentos idMedicamentoOld = persistentPaciente.getIdMedicamento();
+            Medicamentos idMedicamentoNew = paciente.getIdMedicamento();
             if (idHospitalesNew != null) {
                 idHospitalesNew = em.getReference(idHospitalesNew.getClass(), idHospitalesNew.getId());
                 paciente.setIdHospitales(idHospitalesNew);
@@ -87,6 +99,10 @@ public class PacienteJpaController implements Serializable {
             if (idVacunaPacienteNew != null) {
                 idVacunaPacienteNew = em.getReference(idVacunaPacienteNew.getClass(), idVacunaPacienteNew.getId());
                 paciente.setIdVacunaPaciente(idVacunaPacienteNew);
+            }
+            if (idMedicamentoNew != null) {
+                idMedicamentoNew = em.getReference(idMedicamentoNew.getClass(), idMedicamentoNew.getId());
+                paciente.setIdMedicamento(idMedicamentoNew);
             }
             paciente = em.merge(paciente);
             if (idHospitalesOld != null && !idHospitalesOld.equals(idHospitalesNew)) {
@@ -104,6 +120,14 @@ public class PacienteJpaController implements Serializable {
             if (idVacunaPacienteNew != null && !idVacunaPacienteNew.equals(idVacunaPacienteOld)) {
                 idVacunaPacienteNew.getPacienteList().add(paciente);
                 idVacunaPacienteNew = em.merge(idVacunaPacienteNew);
+            }
+            if (idMedicamentoOld != null && !idMedicamentoOld.equals(idMedicamentoNew)) {
+                idMedicamentoOld.getPacienteList().remove(paciente);
+                idMedicamentoOld = em.merge(idMedicamentoOld);
+            }
+            if (idMedicamentoNew != null && !idMedicamentoNew.equals(idMedicamentoOld)) {
+                idMedicamentoNew.getPacienteList().add(paciente);
+                idMedicamentoNew = em.merge(idMedicamentoNew);
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -143,6 +167,11 @@ public class PacienteJpaController implements Serializable {
             if (idVacunaPaciente != null) {
                 idVacunaPaciente.getPacienteList().remove(paciente);
                 idVacunaPaciente = em.merge(idVacunaPaciente);
+            }
+            Medicamentos idMedicamento = paciente.getIdMedicamento();
+            if (idMedicamento != null) {
+                idMedicamento.getPacienteList().remove(paciente);
+                idMedicamento = em.merge(idMedicamento);
             }
             em.remove(paciente);
             em.getTransaction().commit();

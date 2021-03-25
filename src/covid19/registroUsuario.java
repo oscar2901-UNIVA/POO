@@ -51,15 +51,17 @@ public class registroUsuario extends javax.swing.JFrame {
         dtm.addColumn("ID");
         dtm.addColumn("Nombre");
         dtm.addColumn("Contraseña");
+        dtm.addColumn("Tipo de usuario");
         
        
-        Object[] fila = new Object[3];
+        Object[] fila = new Object[4];
         UsuariosJpaController pc = new UsuariosJpaController();
         List<Usuarios> lista = pc.findUsuariosEntities();
         for(Usuarios p:lista){
             fila[0]= p.getId();
             fila[1]= p.getUsuario();
             fila[2]= p.getPassword();
+            fila[3]= p.getUserId();
             
      
             dtm.addRow(fila);
@@ -77,6 +79,7 @@ public class registroUsuario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblUsuarios = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
@@ -90,6 +93,10 @@ public class registroUsuario extends javax.swing.JFrame {
         btnSalir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnRegresarMenuPrinc = new javax.swing.JButton();
+        btnSalir1 = new javax.swing.JButton();
+        RBadministrador = new javax.swing.JRadioButton();
+        RBpaciente = new javax.swing.JRadioButton();
+        jLabel5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -104,17 +111,17 @@ public class registroUsuario extends javax.swing.JFrame {
         jScrollPane3.setViewportView(tblUsuarios);
 
         getContentPane().add(jScrollPane3);
-        jScrollPane3.setBounds(140, 460, 970, 250);
+        jScrollPane3.setBounds(230, 450, 970, 250);
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel3.setText("Usuario:");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(490, 140, 74, 24);
+        jLabel3.setBounds(490, 160, 74, 24);
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel4.setText("Contraseña:");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(490, 200, 107, 24);
+        jLabel4.setBounds(460, 220, 107, 24);
 
         txtNombreUsuarioRegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,7 +129,7 @@ public class registroUsuario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtNombreUsuarioRegistro);
-        txtNombreUsuarioRegistro.setBounds(610, 140, 246, 30);
+        txtNombreUsuarioRegistro.setBounds(590, 160, 246, 30);
 
         txttContraseñaUsuarioRegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -130,7 +137,7 @@ public class registroUsuario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txttContraseñaUsuarioRegistro);
-        txttContraseñaUsuarioRegistro.setBounds(610, 200, 245, 30);
+        txttContraseñaUsuarioRegistro.setBounds(590, 220, 245, 30);
 
         btnModificar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnModificar.setText("Modificar");
@@ -141,7 +148,7 @@ public class registroUsuario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnModificar);
-        btnModificar.setBounds(680, 370, 130, 31);
+        btnModificar.setBounds(680, 370, 130, 38);
 
         btnEliminar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnEliminar.setText("Eliminar");
@@ -152,7 +159,7 @@ public class registroUsuario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnEliminar);
-        btnEliminar.setBounds(840, 370, 130, 31);
+        btnEliminar.setBounds(840, 370, 130, 38);
 
         jLimpiar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLimpiar.setText("limpiar campos");
@@ -162,7 +169,7 @@ public class registroUsuario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jLimpiar);
-        jLimpiar.setBounds(510, 370, 151, 31);
+        jLimpiar.setBounds(510, 370, 148, 38);
 
         btnAgregar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnAgregar.setText("Agregar");
@@ -173,7 +180,7 @@ public class registroUsuario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAgregar);
-        btnAgregar.setBounds(310, 370, 170, 31);
+        btnAgregar.setBounds(310, 370, 170, 38);
 
         btnSalir.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnSalir.setText("Salir");
@@ -183,13 +190,13 @@ public class registroUsuario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnSalir);
-        btnSalir.setBounds(990, 370, 120, 31);
+        btnSalir.setBounds(990, 370, 120, 38);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Registro usuario");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(310, 20, 300, 50);
+        jLabel1.setBounds(560, 10, 300, 50);
 
         btnRegresarMenuPrinc.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnRegresarMenuPrinc.setText("Regresar al menu principal");
@@ -201,9 +208,36 @@ public class registroUsuario extends javax.swing.JFrame {
         getContentPane().add(btnRegresarMenuPrinc);
         btnRegresarMenuPrinc.setBounds(530, 720, 310, 60);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/covid19/imagenfONDO.png"))); // NOI18N
+        btnSalir1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnSalir1.setText("Salir");
+        btnSalir1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalir1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSalir1);
+        btnSalir1.setBounds(990, 370, 120, 38);
+
+        RBadministrador.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(RBadministrador);
+        RBadministrador.setText("Administrador");
+        getContentPane().add(RBadministrador);
+        RBadministrador.setBounds(590, 270, 120, 28);
+
+        RBpaciente.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(RBpaciente);
+        RBpaciente.setText("Usuario");
+        getContentPane().add(RBpaciente);
+        RBpaciente.setBounds(590, 300, 76, 28);
+
+        jLabel5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel5.setText("Tipo de usuario:");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(420, 280, 150, 24);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenFondo/imagenfONDO.png"))); // NOI18N
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(0, 0, 1330, 840);
+        jLabel2.setBounds(0, 0, 1334, 830);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -234,7 +268,9 @@ public class registroUsuario extends javax.swing.JFrame {
         us.setId(id);
         us.setUsuario(txtNombreUsuarioRegistro.getText());
         us.setPassword(txttContraseñaUsuarioRegistro.getText());
-     
+        int TipoAdmin;
+        TipoAdmin = (RBadministrador.isSelected())?1:2;
+        us.setUserId(TipoAdmin);
         UsuariosJpaController oscar = new UsuariosJpaController();
         try {
             oscar.edit(us);
@@ -271,6 +307,9 @@ public class registroUsuario extends javax.swing.JFrame {
         Usuarios us = new Usuarios();
         us.setUsuario(txtNombreUsuarioRegistro.getText());
         us.setPassword(txttContraseñaUsuarioRegistro.getText());
+        int TipoAdmin;
+        TipoAdmin = (RBadministrador.isSelected())?1:2;
+        us.setUserId(TipoAdmin);
       Controladores.UsuariosJpaController Oscar = new Controladores.UsuariosJpaController();
       Oscar.create(us);
     JOptionPane.showMessageDialog(this, "Usuario agregado exitosamente");
@@ -288,6 +327,10 @@ public class registroUsuario extends javax.swing.JFrame {
         pac.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegresarMenuPrincActionPerformed
+
+    private void btnSalir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalir1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSalir1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -325,15 +368,20 @@ public class registroUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton RBadministrador;
+    private javax.swing.JRadioButton RBpaciente;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnRegresarMenuPrinc;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JButton btnSalir1;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JButton jLimpiar;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable tblUsuarios;

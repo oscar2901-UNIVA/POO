@@ -112,6 +112,7 @@ public class registroHospitales extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         cmbVacuna = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1334, 844));
@@ -131,7 +132,7 @@ public class registroHospitales extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Registro hospitales");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(320, 0, 320, 80);
+        jLabel4.setBounds(470, 0, 320, 80);
 
         tblHospital.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -141,7 +142,7 @@ public class registroHospitales extends javax.swing.JFrame {
         jScrollPane3.setViewportView(tblHospital);
 
         getContentPane().add(jScrollPane3);
-        jScrollPane3.setBounds(150, 460, 1040, 250);
+        jScrollPane3.setBounds(170, 440, 1040, 250);
 
         btnModificar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnModificar.setText("Modificar");
@@ -152,7 +153,7 @@ public class registroHospitales extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnModificar);
-        btnModificar.setBounds(700, 360, 130, 31);
+        btnModificar.setBounds(700, 360, 130, 38);
 
         btnEliminar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnEliminar.setText("Eliminar");
@@ -163,7 +164,7 @@ public class registroHospitales extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnEliminar);
-        btnEliminar.setBounds(840, 360, 130, 31);
+        btnEliminar.setBounds(840, 360, 130, 38);
 
         jLimpiar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLimpiar.setText("limpiar campos");
@@ -173,7 +174,7 @@ public class registroHospitales extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jLimpiar);
-        jLimpiar.setBounds(530, 360, 151, 31);
+        jLimpiar.setBounds(530, 360, 148, 38);
 
         btnAgregar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnAgregar.setText("Agregar");
@@ -184,7 +185,7 @@ public class registroHospitales extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAgregar);
-        btnAgregar.setBounds(340, 360, 170, 31);
+        btnAgregar.setBounds(340, 360, 170, 38);
 
         btnSalir.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnSalir.setText("Salir");
@@ -194,7 +195,7 @@ public class registroHospitales extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnSalir);
-        btnSalir.setBounds(980, 360, 120, 31);
+        btnSalir.setBounds(980, 360, 120, 38);
         getContentPane().add(txtNombreHospital);
         txtNombreHospital.setBounds(590, 170, 190, 30);
 
@@ -213,19 +214,21 @@ public class registroHospitales extends javax.swing.JFrame {
         getContentPane().add(jLabel5);
         jLabel5.setBounds(430, 280, 100, 30);
 
+        Rsi.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup1.add(Rsi);
         Rsi.setText("Si");
         getContentPane().add(Rsi);
-        Rsi.setBounds(700, 230, 33, 23);
+        Rsi.setBounds(700, 230, 43, 28);
 
+        Rno.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup1.add(Rno);
         Rno.setText("No");
         getContentPane().add(Rno);
-        Rno.setBounds(770, 230, 40, 23);
+        Rno.setBounds(770, 230, 50, 28);
 
         cmbOcupacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ocupacion:", "Alta", "Media", "Baja" }));
         getContentPane().add(cmbOcupacion);
-        cmbOcupacion.setBounds(660, 290, 180, 20);
+        cmbOcupacion.setBounds(660, 290, 180, 26);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setText("Vacuna:");
@@ -233,11 +236,15 @@ public class registroHospitales extends javax.swing.JFrame {
         jLabel6.setBounds(450, 320, 70, 30);
 
         getContentPane().add(cmbVacuna);
-        cmbVacuna.setBounds(660, 320, 180, 22);
+        cmbVacuna.setBounds(660, 320, 180, 26);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/covid19/imagenfONDO.png"))); // NOI18N
         getContentPane().add(jLabel3);
         jLabel3.setBounds(0, 0, 1340, 844);
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenFondo/imagenfONDO.png"))); // NOI18N
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(0, 0, 1340, 850);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -265,9 +272,7 @@ public class registroHospitales extends javax.swing.JFrame {
         us.setId(id);
         us.setNombreHospital(txtNombreHospital.getText());
         
-        char seguro;
-        seguro = (Rsi.isSelected())?'S':'N';
-        us.setSeguroDeGatosMedicos(seguro); 
+       
        
         us.setOcupacion(cmbOcupacion.getSelectedItem().toString());
         int numero = cmbVacuna.getSelectedIndex();
@@ -316,9 +321,7 @@ public class registroHospitales extends javax.swing.JFrame {
         //
         Hospital hos = new Hospital();
         hos.setNombreHospital(txtNombreHospital.getText());
-        char seguro1;
-        seguro1 = (Rsi.isSelected())?'S':'N';
-        hos.setSeguroDeGatosMedicos(seguro1); 
+        
         hos.setOcupacion(cmbOcupacion.getSelectedItem().toString());
 //        hos.setIdVacunaHospitales((Vacunas) cmbVacuna.getSelectedItem());
         hos.setOcupacion(cmbOcupacion.getSelectedItem().toString());
@@ -401,6 +404,7 @@ public class registroHospitales extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JButton jLimpiar;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable tblHospital;

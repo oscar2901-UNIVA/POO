@@ -77,6 +77,9 @@ public class Paciente implements Serializable {
     @JoinColumn(name = "id_vacuna_paciente", referencedColumnName = "ID")
     @ManyToOne
     private Vacunas idVacunaPaciente;
+    @JoinColumn(name = "id_medicamento", referencedColumnName = "ID")
+    @ManyToOne
+    private Medicamentos idMedicamento;
 
     public Paciente() {
     }
@@ -183,6 +186,14 @@ public class Paciente implements Serializable {
 
     public void setIdVacunaPaciente(Vacunas idVacunaPaciente) {
         this.idVacunaPaciente = idVacunaPaciente;
+    }
+
+    public Medicamentos getIdMedicamento() {
+        return idMedicamento;
+    }
+
+    public void setIdMedicamento(Medicamentos idMedicamento) {
+        this.idMedicamento = idMedicamento;
     }
 
     @Override

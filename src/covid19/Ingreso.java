@@ -18,6 +18,7 @@ public class Ingreso extends javax.swing.JFrame {
     
     public Ingreso() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     

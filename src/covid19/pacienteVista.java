@@ -27,6 +27,7 @@ public class pacienteVista extends javax.swing.JFrame {
      */
     public pacienteVista() {
         initComponents();
+        this.setLocationRelativeTo(null);
         cargaTablaFarmacia();
         cargaTablaHospitales();
         cargaTablaVacunas();

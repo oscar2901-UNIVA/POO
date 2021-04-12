@@ -22,6 +22,7 @@ public class registroUsuariosPacienteAdministrador extends javax.swing.JFrame {
      */
     public registroUsuariosPacienteAdministrador() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
  
 //    
@@ -49,9 +50,6 @@ public class registroUsuariosPacienteAdministrador extends javax.swing.JFrame {
         jLimpiar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         btnRegresarMenuPrinc = new javax.swing.JButton();
-        RBadministrador = new javax.swing.JRadioButton();
-        RBpaciente = new javax.swing.JRadioButton();
-        jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -131,26 +129,9 @@ public class registroUsuariosPacienteAdministrador extends javax.swing.JFrame {
         getContentPane().add(btnRegresarMenuPrinc);
         btnRegresarMenuPrinc.setBounds(610, 710, 310, 40);
 
-        RBadministrador.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup1.add(RBadministrador);
-        RBadministrador.setText("Administrador");
-        getContentPane().add(RBadministrador);
-        RBadministrador.setBounds(520, 300, 120, 28);
-
-        RBpaciente.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup1.add(RBpaciente);
-        RBpaciente.setText("Usuario");
-        getContentPane().add(RBpaciente);
-        RBpaciente.setBounds(520, 340, 76, 28);
-
-        jLabel5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel5.setText("Tipo de usuario:");
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(320, 310, 150, 24);
-
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenFondo/imagenfONDO.png"))); // NOI18N
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 6, 1270, 844);
+        jLabel1.setBounds(0, 0, 1270, 844);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -169,7 +150,7 @@ public class registroUsuariosPacienteAdministrador extends javax.swing.JFrame {
         us.setUsuario(txtNombreUsuarioRegistro.getText());
         us.setPassword(txttContraseñaUsuarioRegistro.getText());
         int TipoAdmin;
-        TipoAdmin = (RBadministrador.isSelected())?1:2;
+        TipoAdmin = 2;
         us.setUserId(TipoAdmin);
         Controladores.UsuariosJpaController Oscar = new Controladores.UsuariosJpaController();
         Oscar.create(us);
@@ -229,8 +210,6 @@ public class registroUsuariosPacienteAdministrador extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JRadioButton RBadministrador;
-    private javax.swing.JRadioButton RBpaciente;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnRegresarMenuPrinc;
     private javax.swing.JButton btnSalir;
@@ -239,7 +218,6 @@ public class registroUsuariosPacienteAdministrador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JButton jLimpiar;
     private javax.swing.JTextField txtNombreUsuarioRegistro;
     private javax.swing.JTextField txttContraseñaUsuarioRegistro;

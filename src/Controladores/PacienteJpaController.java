@@ -11,7 +11,6 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import Entidades.Hospital;
 import Entidades.Vacunas;
 import Entidades.Medicamentos;
 import Entidades.Paciente;
@@ -29,11 +28,12 @@ public class PacienteJpaController implements Serializable {
     public PacienteJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    private EntityManagerFactory emf = null;
 
     public PacienteJpaController() {
         this.emf = Persistence.createEntityManagerFactory("covid19PU");
     }
+    
+    private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
@@ -44,11 +44,6 @@ public class PacienteJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Hospital idHospitales = paciente.getIdHospitales();
-            if (idHospitales != null) {
-                idHospitales = em.getReference(idHospitales.getClass(), idHospitales.getId());
-                paciente.setIdHospitales(idHospitales);
-            }
             Vacunas idVacunaPaciente = paciente.getIdVacunaPaciente();
             if (idVacunaPaciente != null) {
                 idVacunaPaciente = em.getReference(idVacunaPaciente.getClass(), idVacunaPaciente.getId());
@@ -60,10 +55,6 @@ public class PacienteJpaController implements Serializable {
                 paciente.setIdMedicamento(idMedicamento);
             }
             em.persist(paciente);
-            if (idHospitales != null) {
-                idHospitales.getPacienteList().add(paciente);
-                idHospitales = em.merge(idHospitales);
-            }
             if (idVacunaPaciente != null) {
                 idVacunaPaciente.getPacienteList().add(paciente);
                 idVacunaPaciente = em.merge(idVacunaPaciente);
@@ -86,16 +77,10 @@ public class PacienteJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Paciente persistentPaciente = em.find(Paciente.class, paciente.getId());
-            Hospital idHospitalesOld = persistentPaciente.getIdHospitales();
-            Hospital idHospitalesNew = paciente.getIdHospitales();
             Vacunas idVacunaPacienteOld = persistentPaciente.getIdVacunaPaciente();
             Vacunas idVacunaPacienteNew = paciente.getIdVacunaPaciente();
             Medicamentos idMedicamentoOld = persistentPaciente.getIdMedicamento();
             Medicamentos idMedicamentoNew = paciente.getIdMedicamento();
-            if (idHospitalesNew != null) {
-                idHospitalesNew = em.getReference(idHospitalesNew.getClass(), idHospitalesNew.getId());
-                paciente.setIdHospitales(idHospitalesNew);
-            }
             if (idVacunaPacienteNew != null) {
                 idVacunaPacienteNew = em.getReference(idVacunaPacienteNew.getClass(), idVacunaPacienteNew.getId());
                 paciente.setIdVacunaPaciente(idVacunaPacienteNew);
@@ -105,14 +90,6 @@ public class PacienteJpaController implements Serializable {
                 paciente.setIdMedicamento(idMedicamentoNew);
             }
             paciente = em.merge(paciente);
-            if (idHospitalesOld != null && !idHospitalesOld.equals(idHospitalesNew)) {
-                idHospitalesOld.getPacienteList().remove(paciente);
-                idHospitalesOld = em.merge(idHospitalesOld);
-            }
-            if (idHospitalesNew != null && !idHospitalesNew.equals(idHospitalesOld)) {
-                idHospitalesNew.getPacienteList().add(paciente);
-                idHospitalesNew = em.merge(idHospitalesNew);
-            }
             if (idVacunaPacienteOld != null && !idVacunaPacienteOld.equals(idVacunaPacienteNew)) {
                 idVacunaPacienteOld.getPacienteList().remove(paciente);
                 idVacunaPacienteOld = em.merge(idVacunaPacienteOld);
@@ -157,11 +134,6 @@ public class PacienteJpaController implements Serializable {
                 paciente.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The paciente with id " + id + " no longer exists.", enfe);
-            }
-            Hospital idHospitales = paciente.getIdHospitales();
-            if (idHospitales != null) {
-                idHospitales.getPacienteList().remove(paciente);
-                idHospitales = em.merge(idHospitales);
             }
             Vacunas idVacunaPaciente = paciente.getIdVacunaPaciente();
             if (idVacunaPaciente != null) {

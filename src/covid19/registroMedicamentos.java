@@ -24,6 +24,7 @@ public class registroMedicamentos extends javax.swing.JFrame {
      */
     public registroMedicamentos() {
         initComponents();
+        this.setLocationRelativeTo(null);
         cargaTabla();
     }
     

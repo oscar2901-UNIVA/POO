@@ -31,8 +31,10 @@ public class pacienteRegistro extends javax.swing.JFrame {
      */
     public pacienteRegistro() {
         initComponents();
+        this.setLocationRelativeTo(null);
         cargaTabla();
         cargaCombo();
+        
        
     }
     
@@ -397,6 +399,11 @@ public class pacienteRegistro extends javax.swing.JFrame {
         jLabel10.setText("Medicamento:");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 200, -1, -1));
 
+        cmbMedicamentos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbMedicamentosActionPerformed(evt);
+            }
+        });
         getContentPane().add(cmbMedicamentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 200, 120, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/covid19/imagenfONDO.png"))); // NOI18N
@@ -452,6 +459,20 @@ public class pacienteRegistro extends javax.swing.JFrame {
                     break;
             case 2: pac.setIdVacunaPaciente(new Vacunas(3));
                     break;
+            case 3: pac.setIdVacunaPaciente(new Vacunas(4));
+                    break;
+            case 4: pac.setIdVacunaPaciente(new Vacunas(5));
+                    break;
+            case 5: pac.setIdVacunaPaciente(new Vacunas(6));
+                    break;
+            case 6: pac.setIdVacunaPaciente(new Vacunas(7));
+                    break;
+            case 7: pac.setIdVacunaPaciente(new Vacunas(8));
+                    break;
+            case 8: pac.setIdVacunaPaciente(new Vacunas(9));
+                    break;
+            case 9: pac.setIdVacunaPaciente(new Vacunas(10));
+                    break;
             default: break;
         }
      
@@ -464,6 +485,26 @@ public class pacienteRegistro extends javax.swing.JFrame {
                     break;
             case 2: pac.setIdHospitales(new Hospital(3));
                     break;
+            case 3: pac.setIdHospitales(new Hospital(4));
+                    break;
+            case 4: pac.setIdHospitales(new Hospital(5));
+                    break;
+            case 5: pac.setIdHospitales(new Hospital(6));
+                    break;
+            case 6: pac.setIdHospitales(new Hospital(7));
+                    break;
+            case 7: pac.setIdHospitales(new Hospital(8));
+                    break;
+            case 8: pac.setIdHospitales(new Hospital(9));
+                    break;      
+            case 9: pac.setIdHospitales(new Hospital(10));
+                    break;
+            case 10: pac.setIdHospitales(new Hospital(11));
+                    break;       
+            case 11: pac.setIdHospitales(new Hospital(12));
+                    break;        
+            case 12: pac.setIdHospitales(new Hospital(13));
+                    break;
             default: break;
         }
         
@@ -475,6 +516,23 @@ public class pacienteRegistro extends javax.swing.JFrame {
                     break;
             case 2: pac.setIdMedicamento(new Medicamentos(3));
                     break;
+            case 3: pac.setIdMedicamento(new Medicamentos(4));
+                    break;
+            case 4: pac.setIdMedicamento(new Medicamentos(5));
+                    break;
+            case 5: pac.setIdMedicamento(new Medicamentos(6));
+                    break;
+            case 6: pac.setIdMedicamento(new Medicamentos(7));
+                    break;
+            case 7: pac.setIdMedicamento(new Medicamentos(8));
+                    break;
+            case 8: pac.setIdMedicamento(new Medicamentos(9));
+                    break;
+            case 9: pac.setIdMedicamento(new Medicamentos(10));
+                    break;
+                    
+                    
+                    
             default: break;
         }
         
@@ -522,8 +580,6 @@ public class pacienteRegistro extends javax.swing.JFrame {
         pac.setCurp(txtCurp.getText());
         pac.setCiudad(txtCiudad.getText());
         pac.setCodigoPostal(Integer.parseInt(txtCodigoPostal.getText()));
-        
-        
         int numero = comboBoxVacuna.getSelectedIndex();
         switch(numero){
             case 0: pac.setIdVacunaPaciente(new Vacunas(1));
@@ -532,10 +588,22 @@ public class pacienteRegistro extends javax.swing.JFrame {
                     break;
             case 2: pac.setIdVacunaPaciente(new Vacunas(3));
                     break;
+            case 3: pac.setIdVacunaPaciente(new Vacunas(4));
+                    break;
+            case 4: pac.setIdVacunaPaciente(new Vacunas(5));
+                    break;
+            case 5: pac.setIdVacunaPaciente(new Vacunas(6));
+                    break;
+            case 6: pac.setIdVacunaPaciente(new Vacunas(7));
+                    break;
+            case 7: pac.setIdVacunaPaciente(new Vacunas(8));
+                    break;
+            case 8: pac.setIdVacunaPaciente(new Vacunas(9));
+                    break;
+            case 9: pac.setIdVacunaPaciente(new Vacunas(10));
+                    break;
             default: break;
         }
-     
-        
         int numero2 = comboBoxHospital.getSelectedIndex();
         switch(numero2){
             case 0: pac.setIdHospitales(new Hospital(1));
@@ -544,9 +612,28 @@ public class pacienteRegistro extends javax.swing.JFrame {
                     break;
             case 2: pac.setIdHospitales(new Hospital(3));
                     break;
+            case 3: pac.setIdHospitales(new Hospital(4));
+                    break;
+            case 4: pac.setIdHospitales(new Hospital(5));
+                    break;
+            case 5: pac.setIdHospitales(new Hospital(6));
+                    break;
+            case 6: pac.setIdHospitales(new Hospital(7));
+                    break;
+            case 7: pac.setIdHospitales(new Hospital(8));
+                    break;
+            case 8: pac.setIdHospitales(new Hospital(9));
+                    break;      
+            case 9: pac.setIdHospitales(new Hospital(10));
+                    break;
+            case 10: pac.setIdHospitales(new Hospital(11));
+                    break;       
+            case 11: pac.setIdHospitales(new Hospital(12));
+                    break;        
+            case 12: pac.setIdHospitales(new Hospital(13));
+                    break;
             default: break;
         }
-        
         int numero3 = cmbMedicamentos.getSelectedIndex();
         switch(numero3){
             case 0: pac.setIdMedicamento(new Medicamentos(1));
@@ -555,6 +642,23 @@ public class pacienteRegistro extends javax.swing.JFrame {
                     break;
             case 2: pac.setIdMedicamento(new Medicamentos(3));
                     break;
+            case 3: pac.setIdMedicamento(new Medicamentos(4));
+                    break;
+            case 4: pac.setIdMedicamento(new Medicamentos(5));
+                    break;
+            case 5: pac.setIdMedicamento(new Medicamentos(6));
+                    break;
+            case 6: pac.setIdMedicamento(new Medicamentos(7));
+                    break;
+            case 7: pac.setIdMedicamento(new Medicamentos(8));
+                    break;
+            case 8: pac.setIdMedicamento(new Medicamentos(9));
+                    break;
+            case 9: pac.setIdMedicamento(new Medicamentos(10));
+                    break;
+                    
+                    
+                    
             default: break;
         }
           
@@ -671,6 +775,10 @@ public class pacienteRegistro extends javax.swing.JFrame {
     private void comboBoxVacunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxVacunaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboBoxVacunaActionPerformed
+
+    private void cmbMedicamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMedicamentosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbMedicamentosActionPerformed
 
     /**
      * @param args the command line arguments

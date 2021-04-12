@@ -28,7 +28,8 @@ import javax.persistence.Table;
     @NamedQuery(name = "Farmacia.findAll", query = "SELECT f FROM Farmacia f"),
     @NamedQuery(name = "Farmacia.findById", query = "SELECT f FROM Farmacia f WHERE f.id = :id"),
     @NamedQuery(name = "Farmacia.findByNombreFarmacia", query = "SELECT f FROM Farmacia f WHERE f.nombreFarmacia = :nombreFarmacia"),
-    @NamedQuery(name = "Farmacia.findByMunicipio", query = "SELECT f FROM Farmacia f WHERE f.municipio = :municipio")})
+    @NamedQuery(name = "Farmacia.findByMunicipio", query = "SELECT f FROM Farmacia f WHERE f.municipio = :municipio"),
+    @NamedQuery(name = "Farmacia.findByCantidadVacuna", query = "SELECT f FROM Farmacia f WHERE f.cantidadVacuna = :cantidadVacuna")})
 public class Farmacia implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,6 +44,9 @@ public class Farmacia implements Serializable {
     @Basic(optional = false)
     @Column(name = "municipio")
     private String municipio;
+    @Basic(optional = false)
+    @Column(name = "cantidadVacuna")
+    private int cantidadVacuna;
     @JoinColumn(name = "id_vacuna_farmacia", referencedColumnName = "ID")
     @ManyToOne
     private Vacunas idVacunaFarmacia;
@@ -54,10 +58,11 @@ public class Farmacia implements Serializable {
         this.id = id;
     }
 
-    public Farmacia(Integer id, String nombreFarmacia, String municipio) {
+    public Farmacia(Integer id, String nombreFarmacia, String municipio, int cantidadVacuna) {
         this.id = id;
         this.nombreFarmacia = nombreFarmacia;
         this.municipio = municipio;
+        this.cantidadVacuna = cantidadVacuna;
     }
 
     public Integer getId() {
@@ -82,6 +87,14 @@ public class Farmacia implements Serializable {
 
     public void setMunicipio(String municipio) {
         this.municipio = municipio;
+    }
+
+    public int getCantidadVacuna() {
+        return cantidadVacuna;
+    }
+
+    public void setCantidadVacuna(int cantidadVacuna) {
+        this.cantidadVacuna = cantidadVacuna;
     }
 
     public Vacunas getIdVacunaFarmacia() {

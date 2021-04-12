@@ -6,7 +6,6 @@
 package Entidades;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,7 +16,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -45,12 +43,10 @@ public class Hospital implements Serializable {
     private String nombreHospital;
     @Basic(optional = false)
     @Column(name = "SeguroDeGatosMedicos")
-    private String seguroDeGatosMedicos;
+    private char seguroDeGatosMedicos;
     @Basic(optional = false)
     @Column(name = "ocupacion")
     private String ocupacion;
-    @OneToMany(mappedBy = "idHospitales")
-    private List<Paciente> pacienteList;
     @JoinColumn(name = "id_vacuna_hospitales", referencedColumnName = "ID")
     @ManyToOne
     private Vacunas idVacunaHospitales;
@@ -62,7 +58,7 @@ public class Hospital implements Serializable {
         this.id = id;
     }
 
-    public Hospital(Integer id, String nombreHospital, String seguroDeGatosMedicos, String ocupacion) {
+    public Hospital(Integer id, String nombreHospital, char seguroDeGatosMedicos, String ocupacion) {
         this.id = id;
         this.nombreHospital = nombreHospital;
         this.seguroDeGatosMedicos = seguroDeGatosMedicos;
@@ -85,11 +81,11 @@ public class Hospital implements Serializable {
         this.nombreHospital = nombreHospital;
     }
 
-    public String getSeguroDeGatosMedicos() {
+    public char getSeguroDeGatosMedicos() {
         return seguroDeGatosMedicos;
     }
 
-    public void setSeguroDeGatosMedicos(String seguroDeGatosMedicos) {
+    public void setSeguroDeGatosMedicos(char seguroDeGatosMedicos) {
         this.seguroDeGatosMedicos = seguroDeGatosMedicos;
     }
 
@@ -99,14 +95,6 @@ public class Hospital implements Serializable {
 
     public void setOcupacion(String ocupacion) {
         this.ocupacion = ocupacion;
-    }
-
-    public List<Paciente> getPacienteList() {
-        return pacienteList;
-    }
-
-    public void setPacienteList(List<Paciente> pacienteList) {
-        this.pacienteList = pacienteList;
     }
 
     public Vacunas getIdVacunaHospitales() {

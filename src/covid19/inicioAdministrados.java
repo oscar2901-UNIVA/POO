@@ -16,6 +16,8 @@ public class inicioAdministrados extends javax.swing.JFrame {
      */
     public inicioAdministrados() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        
     }
 
     /**

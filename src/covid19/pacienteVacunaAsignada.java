@@ -22,6 +22,7 @@ public class pacienteVacunaAsignada extends javax.swing.JFrame {
      */
     public pacienteVacunaAsignada() {
         initComponents();
+        this.setLocationRelativeTo(null);
         cargaTabla();
     }
  private void cargaTabla(){
@@ -81,6 +82,7 @@ public class pacienteVacunaAsignada extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1700, 930));
         getContentPane().setLayout(null);
 
         tblPaciente.setModel(new javax.swing.table.DefaultTableModel(
@@ -127,13 +129,13 @@ public class pacienteVacunaAsignada extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenFondo/imagenfONDO.png"))); // NOI18N
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 1340, 844);
+        jLabel1.setBounds(0, 10, 1330, 830);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegresarMenuPrincActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarMenuPrincActionPerformed
-        Ingreso pac = new  Ingreso();
+        inicioAdministrados pac = new  inicioAdministrados();
         pac.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegresarMenuPrincActionPerformed

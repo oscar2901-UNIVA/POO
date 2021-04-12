@@ -25,6 +25,7 @@ public class registroVacuna extends javax.swing.JFrame {
      */
     public registroVacuna() {
         initComponents();
+        this.setLocationRelativeTo(null);
         cargaTabla();
         limpiar();
     }

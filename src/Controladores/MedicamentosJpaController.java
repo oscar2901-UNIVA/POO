@@ -28,11 +28,12 @@ public class MedicamentosJpaController implements Serializable {
     public MedicamentosJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    private EntityManagerFactory emf = null;
 
     public MedicamentosJpaController() {
         this.emf = Persistence.createEntityManagerFactory("covid19PU");
     }
+    
+    private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();

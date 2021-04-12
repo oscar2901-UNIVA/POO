@@ -25,6 +25,7 @@ public class registroUsuario extends javax.swing.JFrame {
 
     public registroUsuario() {
         initComponents();
+        this.setLocationRelativeTo(null);
         cargaTabla();
         limpiar();
     }
@@ -245,8 +246,15 @@ public class registroUsuario extends javax.swing.JFrame {
     private void tblUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUsuariosMouseClicked
      int renglon = tblUsuarios.getSelectedRow();
         txtNombreUsuarioRegistro.setText(tblUsuarios.getValueAt(renglon, 1).toString());
-        txttContraseñaUsuarioRegistro.setText(tblUsuarios.getValueAt(renglon, 2).toString());
         
+        txttContraseñaUsuarioRegistro.setText(tblUsuarios.getValueAt(renglon, 2).toString());
+  
+        if(tblUsuarios.getValueAt(renglon, 3).equals('2')){
+             RBpaciente.setSelected(true);
+        }else{
+           
+            RBadministrador.setSelected(true);
+        }
        
         btnModificar.setEnabled(true);
         btnEliminar.setEnabled(true);

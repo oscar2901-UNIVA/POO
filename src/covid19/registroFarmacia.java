@@ -29,6 +29,7 @@ public class registroFarmacia extends javax.swing.JFrame {
      */
     public registroFarmacia() {
         initComponents();
+        this.setLocationRelativeTo(null);
         cargaTabla();
         limpiar();
         cargaCombo();
@@ -41,7 +42,7 @@ public class registroFarmacia extends javax.swing.JFrame {
         dtm.addColumn("Municipio");
        
         dtm.addColumn("Nombre vacuna");
-        
+         dtm.addColumn("cantidad vacuna");
        
         Object[] fila = new Object[5];
         FarmaciaJpaController pc = new FarmaciaJpaController();
@@ -50,8 +51,8 @@ public class registroFarmacia extends javax.swing.JFrame {
             fila[0]= p.getId();
             fila[1]= p.getNombreFarmacia();
             fila[2]= p.getMunicipio();
-            
             fila[3]= p.getIdVacunaFarmacia().getNombreDeVacuna();
+            fila[4]= p.getIdVacunaFarmacia().getCantidad();
      
             dtm.addRow(fila);
             
@@ -156,7 +157,7 @@ public class registroFarmacia extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnModificar);
-        btnModificar.setBounds(690, 420, 130, 31);
+        btnModificar.setBounds(690, 420, 130, 38);
 
         btnEliminar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnEliminar.setText("Eliminar");
@@ -167,7 +168,7 @@ public class registroFarmacia extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnEliminar);
-        btnEliminar.setBounds(830, 420, 130, 31);
+        btnEliminar.setBounds(830, 420, 130, 38);
 
         jLimpiar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLimpiar.setText("limpiar campos");
@@ -177,7 +178,7 @@ public class registroFarmacia extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jLimpiar);
-        jLimpiar.setBounds(520, 420, 151, 31);
+        jLimpiar.setBounds(520, 420, 148, 38);
 
         btnAgregar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnAgregar.setText("Agregar");
@@ -188,7 +189,7 @@ public class registroFarmacia extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAgregar);
-        btnAgregar.setBounds(320, 420, 170, 31);
+        btnAgregar.setBounds(320, 420, 170, 38);
 
         btnSalir.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnSalir.setText("Salir");
@@ -198,7 +199,7 @@ public class registroFarmacia extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnSalir);
-        btnSalir.setBounds(990, 420, 120, 31);
+        btnSalir.setBounds(990, 420, 120, 38);
         getContentPane().add(txtNombreFarmacia);
         txtNombreFarmacia.setBounds(620, 170, 190, 30);
 
@@ -239,9 +240,14 @@ public class registroFarmacia extends javax.swing.JFrame {
         int renglon = tblFarmacia.getSelectedRow();
         txtNombreFarmacia.setText(tblFarmacia.getValueAt(renglon, 1).toString());
         cmbMunicipio.setSelectedItem(tblFarmacia.getValueAt(renglon, 2).toString());
-       
         
-       
+        cmbVacuna.setSelectedItem(tblFarmacia.getValueAt(renglon, 3).toString());
+        
+        
+        
+        
+        
+        txtCantidadVacuna.setText(tblFarmacia.getValueAt(renglon, 4).toString());
         btnModificar.setEnabled(true);
         btnEliminar.setEnabled(true);
     }//GEN-LAST:event_tblFarmaciaMouseClicked

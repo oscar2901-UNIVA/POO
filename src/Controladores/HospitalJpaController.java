@@ -13,8 +13,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import Entidades.Vacunas;
-import Entidades.Paciente;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -34,7 +32,6 @@ public class HospitalJpaController implements Serializable {
         this.emf = Persistence.createEntityManagerFactory("covid19PU");
     }
     
-    
     private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {
@@ -42,9 +39,6 @@ public class HospitalJpaController implements Serializable {
     }
 
     public void create(Hospital hospital) {
-        if (hospital.getPacienteList() == null) {
-            hospital.setPacienteList(new ArrayList<Paciente>());
-        }
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -54,25 +48,10 @@ public class HospitalJpaController implements Serializable {
                 idVacunaHospitales = em.getReference(idVacunaHospitales.getClass(), idVacunaHospitales.getId());
                 hospital.setIdVacunaHospitales(idVacunaHospitales);
             }
-            List<Paciente> attachedPacienteList = new ArrayList<Paciente>();
-            for (Paciente pacienteListPacienteToAttach : hospital.getPacienteList()) {
-                pacienteListPacienteToAttach = em.getReference(pacienteListPacienteToAttach.getClass(), pacienteListPacienteToAttach.getId());
-                attachedPacienteList.add(pacienteListPacienteToAttach);
-            }
-            hospital.setPacienteList(attachedPacienteList);
             em.persist(hospital);
             if (idVacunaHospitales != null) {
                 idVacunaHospitales.getHospitalList().add(hospital);
                 idVacunaHospitales = em.merge(idVacunaHospitales);
-            }
-            for (Paciente pacienteListPaciente : hospital.getPacienteList()) {
-                Hospital oldIdHospitalesOfPacienteListPaciente = pacienteListPaciente.getIdHospitales();
-                pacienteListPaciente.setIdHospitales(hospital);
-                pacienteListPaciente = em.merge(pacienteListPaciente);
-                if (oldIdHospitalesOfPacienteListPaciente != null) {
-                    oldIdHospitalesOfPacienteListPaciente.getPacienteList().remove(pacienteListPaciente);
-                    oldIdHospitalesOfPacienteListPaciente = em.merge(oldIdHospitalesOfPacienteListPaciente);
-                }
             }
             em.getTransaction().commit();
         } finally {
@@ -90,19 +69,10 @@ public class HospitalJpaController implements Serializable {
             Hospital persistentHospital = em.find(Hospital.class, hospital.getId());
             Vacunas idVacunaHospitalesOld = persistentHospital.getIdVacunaHospitales();
             Vacunas idVacunaHospitalesNew = hospital.getIdVacunaHospitales();
-            List<Paciente> pacienteListOld = persistentHospital.getPacienteList();
-            List<Paciente> pacienteListNew = hospital.getPacienteList();
             if (idVacunaHospitalesNew != null) {
                 idVacunaHospitalesNew = em.getReference(idVacunaHospitalesNew.getClass(), idVacunaHospitalesNew.getId());
                 hospital.setIdVacunaHospitales(idVacunaHospitalesNew);
             }
-            List<Paciente> attachedPacienteListNew = new ArrayList<Paciente>();
-            for (Paciente pacienteListNewPacienteToAttach : pacienteListNew) {
-                pacienteListNewPacienteToAttach = em.getReference(pacienteListNewPacienteToAttach.getClass(), pacienteListNewPacienteToAttach.getId());
-                attachedPacienteListNew.add(pacienteListNewPacienteToAttach);
-            }
-            pacienteListNew = attachedPacienteListNew;
-            hospital.setPacienteList(pacienteListNew);
             hospital = em.merge(hospital);
             if (idVacunaHospitalesOld != null && !idVacunaHospitalesOld.equals(idVacunaHospitalesNew)) {
                 idVacunaHospitalesOld.getHospitalList().remove(hospital);
@@ -111,23 +81,6 @@ public class HospitalJpaController implements Serializable {
             if (idVacunaHospitalesNew != null && !idVacunaHospitalesNew.equals(idVacunaHospitalesOld)) {
                 idVacunaHospitalesNew.getHospitalList().add(hospital);
                 idVacunaHospitalesNew = em.merge(idVacunaHospitalesNew);
-            }
-            for (Paciente pacienteListOldPaciente : pacienteListOld) {
-                if (!pacienteListNew.contains(pacienteListOldPaciente)) {
-                    pacienteListOldPaciente.setIdHospitales(null);
-                    pacienteListOldPaciente = em.merge(pacienteListOldPaciente);
-                }
-            }
-            for (Paciente pacienteListNewPaciente : pacienteListNew) {
-                if (!pacienteListOld.contains(pacienteListNewPaciente)) {
-                    Hospital oldIdHospitalesOfPacienteListNewPaciente = pacienteListNewPaciente.getIdHospitales();
-                    pacienteListNewPaciente.setIdHospitales(hospital);
-                    pacienteListNewPaciente = em.merge(pacienteListNewPaciente);
-                    if (oldIdHospitalesOfPacienteListNewPaciente != null && !oldIdHospitalesOfPacienteListNewPaciente.equals(hospital)) {
-                        oldIdHospitalesOfPacienteListNewPaciente.getPacienteList().remove(pacienteListNewPaciente);
-                        oldIdHospitalesOfPacienteListNewPaciente = em.merge(oldIdHospitalesOfPacienteListNewPaciente);
-                    }
-                }
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -162,11 +115,6 @@ public class HospitalJpaController implements Serializable {
             if (idVacunaHospitales != null) {
                 idVacunaHospitales.getHospitalList().remove(hospital);
                 idVacunaHospitales = em.merge(idVacunaHospitales);
-            }
-            List<Paciente> pacienteList = hospital.getPacienteList();
-            for (Paciente pacienteListPaciente : pacienteList) {
-                pacienteListPaciente.setIdHospitales(null);
-                pacienteListPaciente = em.merge(pacienteListPaciente);
             }
             em.remove(hospital);
             em.getTransaction().commit();

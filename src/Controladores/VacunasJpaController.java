@@ -30,11 +30,12 @@ public class VacunasJpaController implements Serializable {
     public VacunasJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    private EntityManagerFactory emf = null;
 
     public VacunasJpaController() {
         this.emf = Persistence.createEntityManagerFactory("covid19PU");
     }
+    
+    private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();

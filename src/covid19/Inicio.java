@@ -16,6 +16,7 @@ public class Inicio extends javax.swing.JFrame {
      */
     public Inicio() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -60,7 +61,7 @@ public class Inicio extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenFondo/imagenfONDO.png"))); // NOI18N
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(-6, 0, 1330, 840);
+        jLabel1.setBounds(0, 0, 1330, 850);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

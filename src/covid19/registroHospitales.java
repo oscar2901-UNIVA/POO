@@ -29,6 +29,7 @@ public class registroHospitales extends javax.swing.JFrame {
      */
     public registroHospitales() {
         initComponents();
+        this.setLocationRelativeTo(null);
         cargaTabla();
         limpiar();
         cargaCombo();
@@ -271,6 +272,9 @@ public class registroHospitales extends javax.swing.JFrame {
         Hospital us = new Hospital();
         us.setId(id);
         us.setNombreHospital(txtNombreHospital.getText());
+        char seguro;
+        seguro = (Rsi.isSelected())?'F':'M';
+        us.setSeguroDeGatosMedicos(seguro);
         
        
        
@@ -282,6 +286,20 @@ public class registroHospitales extends javax.swing.JFrame {
             case 1: us.setIdVacunaHospitales(new Vacunas(2));
                     break;
             case 2: us.setIdVacunaHospitales(new Vacunas(3));
+                    break;
+            case 3: us.setIdVacunaHospitales(new Vacunas(4));
+                    break;
+            case 4: us.setIdVacunaHospitales(new Vacunas(5));
+                    break;
+            case 5: us.setIdVacunaHospitales(new Vacunas(6));
+                    break;
+            case 6: us.setIdVacunaHospitales(new Vacunas(7));
+                    break;
+            case 7: us.setIdVacunaHospitales(new Vacunas(8));
+                    break;
+            case 8: us.setIdVacunaHospitales(new Vacunas(9));
+                    break;
+            case 9: us.setIdVacunaHospitales(new Vacunas(10));
                     break;
             default: break;
         }
@@ -321,9 +339,9 @@ public class registroHospitales extends javax.swing.JFrame {
         //
         Hospital hos = new Hospital();
         hos.setNombreHospital(txtNombreHospital.getText());
-        
-        hos.setOcupacion(cmbOcupacion.getSelectedItem().toString());
-//        hos.setIdVacunaHospitales((Vacunas) cmbVacuna.getSelectedItem());
+        char seguro;
+        seguro = (Rsi.isSelected())?'F':'M';
+        hos.setSeguroDeGatosMedicos(seguro);
         hos.setOcupacion(cmbOcupacion.getSelectedItem().toString());
         int numero = cmbVacuna.getSelectedIndex();
         switch(numero){
@@ -332,6 +350,20 @@ public class registroHospitales extends javax.swing.JFrame {
             case 1: hos.setIdVacunaHospitales(new Vacunas(2));
                     break;
             case 2: hos.setIdVacunaHospitales(new Vacunas(3));
+                    break;
+            case 3: hos.setIdVacunaHospitales(new Vacunas(4));
+                    break;
+            case 4: hos.setIdVacunaHospitales(new Vacunas(5));
+                    break;
+            case 5: hos.setIdVacunaHospitales(new Vacunas(6));
+                    break;
+            case 6: hos.setIdVacunaHospitales(new Vacunas(7));
+                    break;
+            case 7: hos.setIdVacunaHospitales(new Vacunas(8));
+                    break;
+            case 8: hos.setIdVacunaHospitales(new Vacunas(9));
+                    break;
+            case 9: hos.setIdVacunaHospitales(new Vacunas(10));
                     break;
             default: break;
         }
